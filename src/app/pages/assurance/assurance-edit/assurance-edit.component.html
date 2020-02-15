@@ -1,0 +1,62 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{assurance ? 'Modifier la assurance': 'Ajouter une assurance'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="assuranceForm" (ngSubmit)="onAssuranceFormSubmit()">
+
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date Assurance" type="date" formControlName="date"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Véhicule *</label>
+                                    <select formControlName="vehicule">
+                                        <option *ngFor="let vehicule of vehicules"
+                                            [selected]="assurance && assurance.vehicule.id===vehicule.id"
+                                            [ngValue]="vehicule">
+                                            {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                        </option>
+                                    </select>
+                                    <small>Choisissez le véhicule</small>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Assureur" formControlName="prestataire"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Prix Total" formControlName="prixTotal"
+                                        data-role="input">
+                                </div>
+                                
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date Fin Validité" type="date" formControlName="dateLimite"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="assuranceForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

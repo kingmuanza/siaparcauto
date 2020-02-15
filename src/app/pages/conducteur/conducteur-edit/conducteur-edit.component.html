@@ -1,0 +1,54 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{conducteur ? conducteur.immatriculation: 'Ajouter un conducteur'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="conducteurForm" (ngSubmit)="onConducteurFormSubmit()">
+                                <div class="cell-lg-12">
+                                    <input formControlName="matricule" data-role="input" data-prepend="Matricule">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="noms" data-role="input" data-prepend="Noms">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="prenoms" data-role="input" data-prepend="Prénoms">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="numeroPermis" data-role="input" data-prepend="N° Permis">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="cni" data-role="input" data-prepend="N° CNI">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="poste" data-role="input" data-prepend="Poste occupé">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="tel" data-role="input" data-prepend="Tel">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="conducteurForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

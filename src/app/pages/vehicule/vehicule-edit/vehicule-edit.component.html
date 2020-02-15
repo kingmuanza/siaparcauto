@@ -1,0 +1,68 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{vehicule ? vehicule.immatriculation: 'Ajouter un véhicule'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="vehiculeForm" (ngSubmit)="onVehiculeFormSubmit()">
+                                <div class="cell-lg-12">
+                                    <input formControlName="modele" data-role="input" data-prepend="Modèle">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="immatriculation" data-role="input" data-prepend="Immatricuation">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date Immatricuation" type="date" formControlName="dateImmatriculation" data-role="input">
+                                    
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="chassis" data-role="input" data-prepend="Numéro de chassis">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <select formControlName="carburant" data-role="select" data-prepend="Type de carburant">
+                                        <option value="DIESEL">
+                                            DIESEL
+                                        </option>
+                                        <option value="GASOIL">
+                                            GASOIL
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="etiquettes" data-role="input" data-prepend="Etiquettes">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input type="number" formControlName="catalogue" data-role="input" data-prepend="Valeur catalogue">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input type="number" formControlName="achat" data-role="input" data-prepend="Valeur d'achat">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input type="number" formControlName="residuelle" data-role="input" data-prepend="Valeur residuelle">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="vehiculeForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

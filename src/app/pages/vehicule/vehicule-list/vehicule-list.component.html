@@ -1,0 +1,60 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Véhicules
+            <span (click)="addVehicule()" class="muanza-icon">
+                <span class="mif-drive-eta">
+                </span>
+                <sup>
+                    <b>
+                        +
+                    </b>
+                </sup>
+            </span>
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-12">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <table class="table table-border row-border cell-border">
+                                <thead>
+                                    <tr>
+                                        <th>Modèle</th>
+                                        <th>Imm.</th>
+                                        <th>Date Imm.</th>
+                                        <th>N° Chassis</th>
+                                        <th>Carburant</th>
+                                        <th>Valeur Catalogue</th>
+                                        <th>valeur Achat</th>
+                                        <th>valeur Résiduelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let vehicule of vehicules" (click)="edit(vehicule)" style="cursor: pointer;">
+                                        <td>{{vehicule.modele}}</td>
+                                        <td>{{vehicule.immatriculation}}</td>
+                                        <td>{{vehicule.dateImmatriculation | date: 'yyyy-MM-dd'}}</td>
+                                        <td>{{vehicule.numeroChassis}}</td>
+                                        <td>{{vehicule.typeCarburant}}</td>
+                                        <td>{{vehicule.valeurCatalogue ? vehicule.valeurCatalogue:0}}</td>
+                                        <td>{{vehicule.valeurAchat ? vehicule.valeurAchat:0}}</td>
+                                        <td>{{vehicule.valeurResiduelle ? vehicule.valeurResiduelle: 0}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

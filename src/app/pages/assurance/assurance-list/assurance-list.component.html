@@ -1,0 +1,59 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Assurances
+            <span (click)="addAssurance()" class="muanza-icon">
+                <span>
+                    +
+                </span>
+            </span>
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-12">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <table class="table table-border row-border cell-border">
+                                <thead>
+                                    <tr>
+
+                                        <th>Date</th>
+                                        <th>Véhicule</th>
+                                        <th>Assureur </th>
+                                        <th>Date Fin Validité </th>
+                                        <th>Coût </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let assurance of assurances" (click)="edit(assurance)"
+                                        style="cursor: pointer;">
+                                        <td>{{assurance.date | date: 'yyyy-MM-dd'}}</td>
+                                        <td>
+                                            {{assurance.vehicule.modele}} -
+                                            {{assurance.vehicule.immatriculation}}
+
+                                        </td>
+                                        <td style="text-transform: uppercase;">
+                                            {{assurance.prestataire}}
+
+                                        </td>
+                                        <td>{{assurance.dateLimite | date: 'yyyy-MM-dd'}}</td>
+                                        <td>{{assurance.prixTotal}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

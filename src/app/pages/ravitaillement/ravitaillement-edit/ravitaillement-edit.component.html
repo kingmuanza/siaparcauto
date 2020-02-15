@@ -1,0 +1,52 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{ravitaillement ? 'Modifier le ravitaillement': 'Ajouter un ravitaillement'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="ravitaillementForm" (ngSubmit)="onRavitaillementFormSubmit()">
+
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date du relevé" type="date" formControlName="date"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Véhicule *</label>
+                                    <select formControlName="vehicule">
+                                        <option *ngFor="let vehicule of vehicules"
+                                            [selected]="ravitaillement && ravitaillement.vehicule.id===vehicule.id"
+                                            [ngValue]="vehicule">
+                                            {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                        </option>
+                                    </select>
+                                    <small>Choisissez le véhicule</small>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="prixTotal" data-role="input" data-prepend="Prix Total">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="ravitaillementForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

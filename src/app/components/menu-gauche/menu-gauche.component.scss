@@ -1,0 +1,46 @@
+.muanza-menu {
+    padding-left: 0px;;
+}
+.muanza-menu-item-group {
+    padding-left: 0px;;
+}
+.muanza-menu-item {
+    padding-left: 20px;
+    margin-bottom: 5px; 
+    color: #444444;
+    cursor: pointer;
+    transition: padding-top 200ms, padding-bottom 200ms;
+    &:hover{
+        padding-top: 7px;
+        padding-bottom: 7px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+}
+.muanza-menu-item.active{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    background: linear-gradient(to right, #b31217, #e52d27);
+    color: #fff;
+    width: 90%;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.muanza-menu-item:hover a{
+}
+.muanza-menu-item a {
+    text-decoration: none;
+    color: #444444;
+}
+.muanza-menu-icon {
+    margin-right: 15px;
+}
+.muanza-menu-title {
+    text-transform: uppercase;
+    padding: 5px;
+    padding-left: 20px;
+    background-color: #fafafa;;
+}
+.ombre{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

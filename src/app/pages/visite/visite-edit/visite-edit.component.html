@@ -1,0 +1,59 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Enregistrer une visite technique
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="visiteForm" (ngSubmit)="onVisiteFormSubmit()">
+
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date de la visite" type="date" formControlName="date"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date Fin Validité" type="date" formControlName="dateLimite"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Véhicule *</label>
+                                    <select formControlName="vehicule">
+                                        <option *ngFor="let vehicule of vehicules"
+                                            [selected]="visite && visite.vehicule.id===vehicule.id"
+                                            [ngValue]="vehicule">
+                                            {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                        </option>
+                                    </select>
+                                    <small>Choisissez le véhicule</small>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="prestataire" data-role="input" data-prepend="Lieu">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="prixTotal" data-role="input" data-prepend="Prix Total">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="visiteForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

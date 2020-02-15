@@ -1,0 +1,137 @@
+.hauteur70 {
+    height: 50vmin;
+}
+
+.mainMuanza {
+    margin-top: -47vmin;
+}
+.muanza-container-fluid {
+    padding: 25px;
+    padding-top: 0px;
+}
+
+.back-gradient {
+    background: #e52d27;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #b31217, #e52d27);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #b31217, #e52d27);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.instagram {
+    background: linear-gradient(to bottom, #833ab4, #fd1d1d, #fcb045);
+}
+
+.mon-menu {
+    // font-family: 'Open Sans Condensed';
+    letter-spacing: 1.5;
+}
+
+.manuscrit {
+
+    font-family: 'Pinyon Script';
+    font-size: 1.4em;
+
+}
+
+
+.mon-menu-item {
+    margin-right: 2vmax;
+    color: #ccc;
+    max-width: 15vw;
+    height: 6vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.mon-menu-item.active {
+    margin-right: 2vmax;
+    padding-bottom: 0px;
+    color: #fafafa;
+    border-bottom: 0px solid #fafafa;
+}
+
+li a {
+    text-decoration: none;
+    border: 0px solid #fafafa;
+}
+
+a {
+    text-decoration: none;
+    border: 0px solid #fafafa;
+    border: 0px solid #fafafa;
+}
+
+@media only screen and (max-width: 600px) {
+    .hauteur70 {
+        height: 120vmin;
+    }
+
+    .mainMuanza {
+        margin-top: -85vmin;
+    }
+
+    .mon-menu-item {
+        font-size: 0.65em;
+        max-width: 20vw;
+        height: 7vmin;
+    }
+
+    .mon-menu-item.active {
+        margin-right: 2vmax;
+        padding-bottom: 5px;
+        color: #fafafa;
+        border-bottom: 2px solid #fafafa;
+    }
+
+    .mon-menu {
+        margin-top: 10px;
+    }
+}
+
+.ombre{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* latin */
+@font-face {
+    font-family: 'Pinyon Script';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Pinyon Script'), local('PinyonScript'), url(https://fonts.gstatic.com/s/pinyonscript/v9/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.muanza-icon {
+    font-size: 1.5em;
+    padding-left: 5px;
+    padding-right: 5px;
+    sup {
+        margin-left: -5px;
+    }
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+
+input[type="text"],
+textarea {
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border: 0px solid #444;
+    border-radius: 0px;
+    ;
+    padding-left: 60px;
+    color: #fff;
+}
+
+input:focus {
+    outline: none;
+    border: 0px solid #444;
+}

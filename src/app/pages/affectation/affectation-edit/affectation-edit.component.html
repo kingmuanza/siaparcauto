@@ -1,0 +1,61 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{affectation ? 'Modifier l\'affectation': 'Ajouter une affectation'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="affectationForm" (ngSubmit)="onAffectationFormSubmit()">
+                                
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date d'affectation" type="date" formControlName="date" data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Véhicule *</label>
+                                    <select formControlName="vehicule">
+                                        <option *ngFor="let vehicule of vehicules" [selected]="affectation && affectation.vehicule.id===vehicule.id"  [ngValue]="vehicule">
+                                            {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                        </option>
+                                    </select>
+                                    <small>Choisissez le véhicule</small>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Conducteur *</label>
+                                    <select formControlName="conducteur">
+                                        <option [selected]="affectation && affectation.conducteur.id===conducteur.id" *ngFor="let conducteur of conducteurs" [ngValue]="conducteur">
+                                            {{conducteur.noms}} {{conducteur.prenoms}}
+                                        </option>
+                                    </select>
+                                    <small>Choisissez la personne à qui le véhicule a été affecté</small>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="decision" data-role="input" data-prepend="Décision">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input formControlName="motif" data-role="input" data-prepend="Motif">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="affectationForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

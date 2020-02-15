@@ -1,0 +1,52 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{panne ? 'Modifier la panne': 'Ajouter une panne'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="panneForm" (ngSubmit)="onPanneFormSubmit()">
+
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date de la panne" type="date" formControlName="date"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Véhicule *</label>
+                                    <select formControlName="vehicule">
+                                        <option *ngFor="let vehicule of vehicules"
+                                            [selected]="panne && panne.vehicule.id===vehicule.id"
+                                            [ngValue]="vehicule">
+                                            {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                        </option>
+                                    </select>
+                                    <small>Choisissez le véhicule</small>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <textarea formControlName="description" data-role="textarea" data-prepend="Description"></textarea>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="panneForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

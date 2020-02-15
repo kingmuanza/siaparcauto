@@ -1,0 +1,34 @@
+<div [ngClass]="{'connexion': !utilisateur, 'page': true}">
+    <div class="entete">
+        <h1>
+            Connexion
+        </h1>
+    </div>
+    <div class="contenu">
+        <form [formGroup]="connexionForm" (ngSubmit)="onConnexionFormSubmit()">
+            <div class="row">
+                <div class="cell-lg-4">
+                    <input formControlName="login" data-role="input" data-prepend="Login">
+                </div>
+                <div class="cell-lg-4">
+                    <input formControlName="passe" data-role="input" type="password" data-prepend="Mot de passe">
+                </div>
+                <div class="cell-lg-2">
+                    <button class="button" [disabled]="connexionForm.invalid">
+                        Connexion
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="message fg-white">
+            <small>
+                Si vous ne disposez pas de paramètres d'authentification, veuillez contacter l'administrateur
+            </small>
+        </div>
+
+        <div style="display: none">
+            utilisateur : {{utilisateur ? utilisateur.uid: 'Aucun ID'}}
+        </div>
+
+    </div>
+</div>

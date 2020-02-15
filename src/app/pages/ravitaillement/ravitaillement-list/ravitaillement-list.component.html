@@ -1,0 +1,58 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Ravitaillements
+            <span (click)="addRavitaillement()" class="muanza-icon">
+                <span>
+                    +
+                </span>
+            </span>
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-12">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <table class="table table-border row-border cell-border">
+                                <thead>
+                                    <tr>
+
+                                        <th>Date</th>
+                                        <th>Véhicule</th>
+                                        <th>Conducteur lors du ravitaillement</th>
+                                        <th>Prix Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ravitaillement of ravitaillements" (click)="edit(ravitaillement)"
+                                        style="cursor: pointer;">
+                                        <td>{{ravitaillement.date | date: 'yyyy-MM-dd'}}</td>
+                                        <td>
+                                            {{ravitaillement.vehicule.modele}} -
+                                            {{ravitaillement.vehicule.immatriculation}}
+
+                                        </td>
+                                        <td style="text-transform: uppercase;">
+                                            {{ravitaillement.conducteur.noms}}
+                                            {{ravitaillement.conducteur.prenoms}}
+
+                                        </td>
+                                        <td>{{ravitaillement.prixTotal}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

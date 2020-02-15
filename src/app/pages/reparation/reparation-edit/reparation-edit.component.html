@@ -1,0 +1,59 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Enregistrer une réparation
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="reparationForm" (ngSubmit)="onReparationFormSubmit()">
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Date de la réparation" type="date" formControlName="date"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Véhicule *</label>
+                                    <select formControlName="vehicule">
+                                        <option *ngFor="let vehicule of vehicules"
+                                            [selected]="reparation && reparation.vehicule.id===vehicule.id"
+                                            [ngValue]="vehicule">
+                                            {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                        </option>
+                                    </select>
+                                    <small>Choisissez le véhicule</small>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <textarea formControlName="description" data-role="textarea" data-prepend="Description"></textarea>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Coût Total" formControlName="coutTotal"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Effectué par" formControlName="effectuePar"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="reparationForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

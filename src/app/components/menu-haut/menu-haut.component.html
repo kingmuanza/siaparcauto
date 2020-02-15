@@ -1,0 +1,56 @@
+<div *ngIf="utilisateur" class="" style="position: absolute; top: 0; left: 0; width: 100%; opacity: 1; ">
+    <div
+        style="position: fixed; width: 100%;padding-left: 20px; padding-top: 5px; margin-right: 17px;">
+        <div class="row">
+            <div class="cell-lg-7">
+                <span class="mif-search fg-white"
+                    style="position: absolute; padding: 5px; padding-top: 7px; padding-left: 20px;">
+
+                </span>
+                <input type="text">
+            </div>
+            <div class="cell-lg-1 fg-white">
+                <span (click)="addVehicule()" class="muanza-icon">
+                    <span class="mif-drive-eta">
+                    </span>
+                    <sup>
+                        <b>
+                            +
+                        </b>
+                    </sup>
+                </span>
+                <span (click)="addConducteur()" class="muanza-icon">
+                    <span class="mif-user">
+                    </span>
+                    <sup>
+                        <b>
+                            +
+                        </b>
+                    </sup>
+                </span>
+            </div>
+            <div class="cell-lg-4 hideOnMobile">
+                <div class="row">
+                    <div class="cell-lg-2 cell-2 fg-white" style="text-align: right;">
+                        <div style="margin-top: -3px;;">
+                            <img src="../assets/img/verlaine.jfif"
+                                style="height: 35px; border: 0px solid #8e2de2;">
+                        </div>
+                    </div>
+                    <div class="cell-lg-10 cell-10 fg-white">
+                        <div style="position: absolute; padding: 5px; margin-top: -10px; padding-left: 0px;">
+                            <span class="">
+                                {{utilisateur.noms ? utilisateur.noms: emailSplit(utilisateur.email)}}
+                            </span>
+                            <div style="margin-top: -10px;;">
+                                <small>
+                                    Administrateur
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
