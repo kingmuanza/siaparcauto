@@ -1,0 +1,41 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{leasing ? 'Modifier le leasing': 'Ajouter un leasing'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="leasingForm" (ngSubmit)="onLeasingFormSubmit()">
+
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Code" formControlName="code"
+                                        data-role="input">
+                                </div><div class="cell-lg-12">
+                                    <input data-prepend="Nom" formControlName="nom"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="leasingForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

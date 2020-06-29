@@ -21,7 +21,7 @@
                             </h2>
                         </div>
                         <div class="contenu">
-                            <table class="table table-border row-border cell-border">
+                            <table class="table compact table-border row-border cell-border">
                                 <thead>
                                     <tr>
 
@@ -41,9 +41,10 @@
 
                                         </td>
                                         <td style="text-transform: uppercase;">
-                                            {{panne.conducteur.noms}}
-                                            {{panne.conducteur.prenoms}}
-
+                                            <span *ngIf="panne.conducteur">
+                                                {{panne.conducteur.noms}}
+                                                {{panne.conducteur.prenoms}}
+                                            </span>
                                         </td>
                                         <td>{{panne.description}}</td>
                                     </tr>

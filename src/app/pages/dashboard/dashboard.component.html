@@ -10,7 +10,106 @@
         </div>
         <div class="boards">
             <div class="row">
+                <div *ngIf="voirSuivi" class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Etat des véhicules
+                                <span style="float: right;">
+                                    {{vehicules.length}}
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="contenu" style="padding: 0px;">
+                            <canvas style="width: 100vw;" #donut></canvas>
+                        </div>
+                    </div>
+                </div>
                 <div class="cell-lg-3">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Visites
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <div class="liste">
+                                <div *ngFor="let kilo of visites; index as i" class="liste--element">
+                                    <ng-container *ngIf="i < 4">
+                                        <div class="libelle" style="line-height: 0.9;">
+                                            <small>
+                                                {{kilo.vehicule.immatriculation}}
+                                            </small>
+                                            <br>
+                                            <small>
+                                                {{kilo.date | date: 'yyyy-MM-dd'}}
+                                            </small>
+                                            <small>
+                                                {{kilo.prestataire}}
+                                            </small>
+                                        </div>
+                                        <div class="montant">
+                                            <small>
+                                                <b>
+                                                    {{kilo.prixTotal  | currency:'XAF':''}} XAF
+                                                </b>
+                                            </small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bas" (click)="goTo('visite')">
+                            <span>
+                                Détails
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="cell-lg-3">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Pannes
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <h3 style="margin: 0;">
+                                {{pannes.length}}
+                            </h3>
+                            <div class="liste">
+                                <div *ngFor="let kilo of pannes; index as i" class="liste--element">
+                                    <div class="libelle">
+                                        <small>
+                                            {{kilo.vehicule.immatriculation}}
+                                        </small>
+                                    </div>
+                                    <div class="montant" style="line-height: 0.9;">
+                                        
+                                        <small>
+                                            {{kilo.date | date: 'yyyy-MM-dd'}}
+                                        </small>
+                                        <br>
+                                        <small>
+                                            <b>
+                                                {{kilo.description}}
+                                            </b>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bas" (click)="goTo('panne')">
+                            <span>
+                                Détails
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div *ngIf="voirSuivi" class="cell-lg-3">
                     <div class="board">
                         <div class="entete">
                             <h2>
@@ -18,15 +117,12 @@
                             </h2>
                         </div>
                         <div class="contenu">
-                            <h3>
-                                {{affectations.length}}
-                            </h3>
                             <div class="liste">
                                 <div *ngFor="let affectation of affectations; index as i" class="liste--element">
                                     <ng-container *ngIf="i<3">
                                         <div class="libelle">
                                             <small>
-                                                {{affectation.date | date: 'yyyy-MM-dd'}}
+                                                {{affectation.vehicule.immatriculation}}
                                             </small>
                                         </div>
                                         <div class="montant">
@@ -58,13 +154,11 @@
                             </h2>
                         </div>
                         <div class="contenu">
-                            <h3>
-                                {{kilometrages.length}}
-                            </h3>
                             <div class="liste">
                                 <div *ngFor="let kilo of kilometrages; index as i" class="liste--element">
                                     <div class="libelle">
                                         <small>
+                                            {{kilo.vehicule.immatriculation}}&nbsp;
                                             {{kilo.date | date: 'yyyy-MM-dd'}}
                                         </small>
                                     </div>
@@ -87,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="cell-lg-3">
+                <div *ngIf="voirSuivi" class="cell-lg-3">
                     <div class="board">
                         <div class="entete">
                             <h2>
@@ -116,42 +210,6 @@
                             </div>
                         </div>
                         <div class="bas" (click)="goTo('ravitaillement')">
-                            <span>
-                                Détails
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="cell-lg-3">
-                    <div class="board">
-                        <div class="entete">
-                            <h2>
-                                Pannes
-                            </h2>
-                        </div>
-                        <div class="contenu">
-                            <h3>
-                                {{pannes.length}}
-                            </h3>
-                            <div class="liste">
-                                <div *ngFor="let kilo of pannes; index as i" class="liste--element">
-                                    <div class="libelle">
-                                        <small>
-                                            {{kilo.date | date: 'yyyy-MM-dd'}}
-                                        </small>
-                                    </div>
-                                    <div class="montant" style="line-height: 0.9;">
-                                        <small>
-                                            <b>
-                                                {{kilo.description}}
-                                            </b>
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bas" (click)="goTo('panne')">
                             <span>
                                 Détails
                             </span>
@@ -199,47 +257,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="cell-lg-3">
-                    <div class="board">
-                        <div class="entete">
-                            <h2>
-                                Visites
-                            </h2>
-                        </div>
-                        <div class="contenu">
-                            <h3>
-                                {{getTotalVisites(visites)  | currency:'XAF':''}} XAF
-                            </h3>
-                            <div class="liste">
-                                <div *ngFor="let kilo of visites; index as i" class="liste--element">
-                                    <div class="libelle" style="line-height: 0.9;">
-                                        <small>
-                                            {{kilo.date | date: 'yyyy-MM-dd'}}
-                                        </small>
-                                        <br>
-                                        <small>
-                                            {{kilo.prestataire}}
-                                        </small>
-                                    </div>
-                                    <div class="montant">
-                                        <small>
-                                            <b>
-                                                {{kilo.coutTotal  | currency:'XAF':''}} XAF
-                                            </b>
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bas" (click)="goTo('visite')">
-                            <span>
-                                Détails
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="cell-lg-3">
+                <div *ngIf="voirSuivi" class="cell-lg-3">
                     <div class="board">
                         <div class="entete">
                             <h2>

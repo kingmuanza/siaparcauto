@@ -1,0 +1,67 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Sites
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-9">
+                    <div class="board">
+                        <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
+                        
+                        <div class="entete">
+                            <div class="row">
+                                <div class="cell-lg-2">
+                                    <button class="button"  (click)="refresh()">
+                                        <span class="mif-refresh"></span>
+                                        Actualiser
+                                    </button>
+                                </div>
+                                <div class="cell-lg-2">
+                                    <button class="button" (click)="add()">
+                                        <span class="mif-add"></span>
+                                        Nouveau
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contenu">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover">
+                                <thead>
+                                    <tr>
+
+                                        <th>Code</th>
+                                        <th>Nom</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let site of sites" (click)="edit(site)" style="cursor: pointer;">
+                                        <td>{{site.code}}</td>
+                                        <td>
+                                            {{site.nom}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell-lg-3" style="display: none;">
+                    <div class="board">
+                    <div class="entete">
+                        <h2>
+                            Diagramme de repartition des véhicules par site
+                        </h2>
+                    </div>
+                    <div class="contenu">
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

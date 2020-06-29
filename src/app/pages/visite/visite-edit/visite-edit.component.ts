@@ -91,8 +91,8 @@ export class VisiteEditComponent implements OnInit {
 
   initVisiteForm() {
     this.visiteForm = this.formBuilder.group({
-      date: [this.visite ? this.currentDate(this.visite.date) : this.currentDate(), []],
-      dateLimite: [this.visite ? this.currentDate(this.visite.dateLimite) : this.currentDate(), []],
+      date: [this.visite ? this.currentDate(this.visite.date) : this.currentDate(new Date('2019-01-01')), []],
+      dateLimite: [this.visite ? this.currentDate(this.visite.dateLimite) : this.currentDate(new Date('2020-01-01')), []],
       vehicule: [this.visite ? this.visite.vehicule : '', [Validators.required]],
       prestataire: [this.visite ? this.visite.prestataire : '', []],
       prixTotal: [this.visite ? this.visite.prixTotal : 0, []]

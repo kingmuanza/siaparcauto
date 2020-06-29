@@ -2,33 +2,49 @@
     <div class="entete">
         <h1>
             Assurances
-            <span (click)="addAssurance()" class="muanza-icon">
-                <span>
-                    +
-                </span>
-            </span>
         </h1>
 
     </div>
     <div class="contenu">
         <div class="boards">
             <div class="row">
-                <div class="cell-lg-12">
+                <div class="cell-lg-10">
                     <div class="board">
+                        <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
                         <div class="entete">
-                            <h2>
-                                Informations
-                            </h2>
+                            <div class="row">
+                                <div class="cell-lg-2">
+                                    <button class="button small">
+                                        <span class="mif-refresh"></span>
+                                        Actualiser
+                                    </button>
+                                </div>
+                                <div class="cell-lg-2">
+                                    <button style="width: 100%;" class="button small" (click)="add()">
+                                        <span class="mif-add"></span>
+                                        Nouveau
+                                    </button>
+                                </div>
+                                <div class="cell-lg-2">
+                                </div>
+                                <div class="cell-lg-6">
+                                    <input 
+                                    class="input-small" 
+                                    placeholder="Rechercher..."
+                                    data-role="input">
+                                </div>
+                            </div>
                         </div>
                         <div class="contenu">
-                            <table class="table table-border row-border cell-border">
+                            <table class="table compact table-border row-border cell-border">
                                 <thead>
                                     <tr>
 
                                         <th>Date</th>
-                                        <th>Véhicule</th>
+                                        <th>Imm.</th>
+                                        <th>Modèle</th>
                                         <th>Assureur </th>
-                                        <th>Date Fin Validité </th>
+                                        <th>Validité </th>
                                         <th>Coût </th>
                                     </tr>
                                 </thead>
@@ -37,9 +53,10 @@
                                         style="cursor: pointer;">
                                         <td>{{assurance.date | date: 'yyyy-MM-dd'}}</td>
                                         <td>
-                                            {{assurance.vehicule.modele}} -
                                             {{assurance.vehicule.immatriculation}}
-
+                                        </td>
+                                        <td>
+                                            {{assurance.vehicule.modele}}
                                         </td>
                                         <td style="text-transform: uppercase;">
                                             {{assurance.prestataire}}

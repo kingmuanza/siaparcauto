@@ -3,21 +3,27 @@
         <h1>
             Suivi des véhicules
         </h1>
+        <div style="background-color: #fff;">
+            <input style="opacity: 0.8;" placeholder="Rechercher une immatriculation" [(ngModel)]="recherche" (ngModelChange)="rechercher($event)" data-role="input">
+        </div>
     </div>
     <div class="contenu">
         <div class="boards">
             <div class="row">
-                <div *ngFor="let vehicule of vehicules" class="cell-lg-3">
-                    <div (click)="view(vehicule)" class="board">
+                <div *ngFor="let vehicule of vehiculesResultats" class="cell-lg-3">
+                    <div (click)="view(vehicule)" class="board"
+                    [ngClass]="{'panne': vehicule.etat==='En panne', 'vetuste': vehicule.etat==='Vétuste', 'epave': vehicule.etat==='Epave', 'indefini': !vehicule.etat}">
 
                         <div class="entete">
-
                             <h2>
+                                <span *ngIf="manqueInfos(vehicule)" style="float: right;" title="Informations manquantes sur le véhicule">
+                                    <span class="mif-info fg-orange"></span>
+                                </span>
                                 {{vehicule.modele}}
                             </h2>
                         </div>
                         <div class="contenu">
-                            <h3 style="font-size:1.2em">
+                            <h3 style="font-size:1.0em; margin: 0; white-space: nowrap; text-overflow: clip;">
                                 <span *ngIf="vehicule.conducteur">
                                     {{vehicule.conducteur.noms}}
                                     {{vehicule.conducteur.prenoms}}
@@ -27,14 +33,30 @@
                                 </span>
                             </h3>
 
-                            <div style="margin-top: -10px;">
+                            <div style="margin-top: 0px; line-height: 0.95;">
+                                <small>
+                                    <b>
+                                        {{vehicule.siteActuel ? vehicule.siteActuel.nom : 'Aucun site'}},
+                                    </b>
+                                    {{vehicule.direction ? vehicule.direction.nom : 'Aucune direction'}}
+                                </small>
+                            </div>
+
+                            <div style="margin-top: -5px;">
+                                <small>
+                                    {{vehicule.etat ? vehicule.etat : 'Etat inconnu'}}
+                                </small>
+                            </div>
+
+                            <div style="margin-top: -5px;">
                                 <small *ngIf="vehicule.conducteur">
-                                    Conducteur actuel
+                                    {{vehicule.type ? vehicule.type : 'Utilisation inconnue'}}
                                 </small>
                             </div>
                         </div>
 
-                        <div class="bas">
+                        <div class="bas" 
+                        [ngClass]="{'panne': vehicule.etat==='En panne', 'vetuste': vehicule.etat==='Vétuste', 'epave': vehicule.etat==='Epave', 'indefini': !vehicule.etat}">
                             <span>
                                 {{vehicule.immatriculation}}
                             </span>

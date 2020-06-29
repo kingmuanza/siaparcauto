@@ -31,6 +31,20 @@ import { AssuranceListComponent } from './pages/assurance/assurance-list/assuran
 import { AssuranceEditComponent } from './pages/assurance/assurance-edit/assurance-edit.component';
 import { VehiculeSuiviComponent } from './pages/vehicule/vehicule-suivi/vehicule-suivi.component';
 import { VehiculeViewComponent } from './pages/vehicule/vehicule-view/vehicule-view.component';
+import { SiteEditComponent } from './pages/site/site-edit/site-edit.component';
+import { SiteListComponent } from './pages/site/site-list/site-list.component';
+import { LeasingEditComponent } from './pages/leasing/leasing-edit/leasing-edit.component';
+import { LeasingListComponent } from './pages/leasing/leasing-list/leasing-list.component';
+import { DepartementEditComponent } from './pages/departement/departement-edit/departement-edit.component';
+import { DepartementListComponent } from './pages/departement/departement-list/departement-list.component';
+import { UtilisateurEditComponent } from './pages/utilisateur/utilisateur-edit/utilisateur-edit.component';
+import { UtilisateurListComponent } from './pages/utilisateur/utilisateur-list/utilisateur-list.component';
+import { VisiteSuiviComponent } from './pages/visite/visite-suivi/visite-suivi.component';
+import { VisiteViewComponent } from './pages/visite/visite-view/visite-view.component';
+import { RechercherComponent } from './pages/vehicule/rechercher/rechercher.component';
+import { MissionEditComponent } from './pages/mission/mission-edit/mission-edit.component';
+import { CarteGriseEditComponent } from './pages/carte-grise/carte-grise-edit/carte-grise-edit.component';
+import { CarteGriseSuiviComponent } from './pages/carte-grise/carte-grise-suivi/carte-grise-suivi.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +72,21 @@ import { VehiculeViewComponent } from './pages/vehicule/vehicule-view/vehicule-v
     AssuranceListComponent,
     AssuranceEditComponent,
     VehiculeSuiviComponent,
-    VehiculeViewComponent
+    VehiculeViewComponent,
+    SiteEditComponent,
+    SiteListComponent,
+    LeasingEditComponent,
+    LeasingListComponent,
+    DepartementEditComponent,
+    DepartementListComponent,
+    UtilisateurEditComponent,
+    UtilisateurListComponent,
+    VisiteSuiviComponent,
+    VisiteViewComponent,
+    RechercherComponent,
+    MissionEditComponent,
+    CarteGriseEditComponent,
+    CarteGriseSuiviComponent
   ],
   imports: [
     BrowserModule,

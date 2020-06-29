@@ -1,0 +1,73 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            {{departement ? 'Modifier le département': 'Ajouter un département'}}
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+
+                            <form [formGroup]="departementForm" (ngSubmit)="onDepartementFormSubmit()">
+
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Code" formControlName="code" data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <input data-prepend="Nom" formControlName="nom" data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <label>Département</label>
+                                    <select [formControl]="departementForm.controls.parent">
+                                        <option [ngValue]="null" [selected]="departement && !departement.parent">
+                                            Aucun parent
+                                        </option>
+                                        <ng-container *ngFor="let d of nonfils">
+                                            <option
+                                                [selected]="departement && departement.parent && departement.parent.id === d.id"
+                                                *ngIf="!(departement && departement.id === d.id)" [ngValue]="d">
+                                                {{d.nom}}
+                                            </option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="departementForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Sous départements
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <ul *ngIf="departement">
+                                <div *ngFor="let f of fils">
+                                    <li [ngStyle]="{'margin-left': 50 * generateArray(f.niveau).length +'px' }">
+                                        {{f.nom}}
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

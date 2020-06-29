@@ -1,10 +1,26 @@
 import * as uuid from 'uuid';
 import { Conducteur } from './conducteur.model';
+import { Site } from './site.model';
+import { Departement } from './departement.model';
+import { Leasing } from './leasing.model';
 
 export class Vehicule {
     id: string;
-    modele: string;
     immatriculation: string;
+    dateFinCarteGrise?: Date;
+    modele: string;
+    chevaux: string;
+    dateAcquisition: Date;
+    siteActuel: Site;
+    direction: Departement;
+    type: string;
+    etat: string;
+    departementActuel: Departement;
+    proprietaire: boolean;
+    leasing: Leasing;
+
+
+
     etiquettes: Array<string>;
     dateImmatriculation: Date;
     numeroChassis: string;

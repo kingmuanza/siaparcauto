@@ -1,15 +1,366 @@
+$primaire: #e52d27;
+$primaire: #0072ff;
+$secondaire: lighten($primaire, 25%);
+
+@mixin background-lineaire {
+  background: #00c6ff;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, $primaire, $secondaire);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, $primaire, $secondaire);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
 .page {
   margin-top: 7vh;
+
   .entete {
     h1 {
       margin-top: 0;
       font-size: 2.0em;
-      color: white;
+      color: white
     }
   }
+
   &.connexion {
     margin-left: 10vw;
     margin-top: 5vh;
   }
-} 
+}
 
+.bg-bleu {
+  background-color: #1fc8f8;
+}
+
+.fg-bleu {
+  color: #1fc8f8;
+}
+
+// ROUGE
+/*
+.back-gradient {
+  background: #e52d27;
+  background: -webkit-linear-gradient(to right, #b31217, #e52d27);
+  background: linear-gradient(to right, #b31217, #e52d27);
+
+}*/
+
+.back-gradient {
+  @include background-lineaire();
+}
+
+.button.muanza {
+  background: linear-gradient(to right, $primaire, lighten($primaire, 5%));
+  border: 0px solid $primaire;
+  color: white;
+  border-radius: 0px;
+}
+
+.boards {
+  margin-top: 10px;
+
+  .board {
+    border: 1px solid $primaire;
+    background-color: rgba(255, 255, 255, 1);
+    padding-bottom: 20px;
+
+    &.panne {
+      border: 1px solid #fa6800;
+    }
+    &.vetuste {
+      border: 1px solid #76a346;
+    }
+    &.epave {
+      border: 1px solid #e52d27;
+    }
+    &.indefini {
+      border: 1px solid #aaa;
+    }
+
+    
+    .entete {
+      padding-left: 1.5vw;
+      padding-right: 1.5vw;
+      margin-top: 10px;
+
+      button {
+        background: linear-gradient(to right, $primaire, lighten($primaire, 5%));
+        color: #fff;
+        margin-right: 10px;
+        width: 100%;
+        span {
+          margin-right: 10px;
+        }
+        padding-bottom: 5px;
+      }
+
+      h2 {
+        font-weight: 100;
+        font-size: 1.5em;
+        padding-bottom: 2vh;
+        border-bottom: 1px solid #eee;
+      }
+    }
+
+    .contenu {
+      padding-left: 1.5vw;
+      padding-right: 1.5vw;
+      padding-top: 0.5vh;
+    }
+
+    .bas {
+      @include background-lineaire();
+
+      &.panne {
+        background: linear-gradient(to right, #fa6800, lighten(#fa6800, 5%));
+      }
+      &.vetuste {
+        background: linear-gradient(to right, #76a346, lighten(#76a346, 5%));
+      }
+      &.epave {
+        background: linear-gradient(to right, #e52d27, lighten(#e52d27, 5%));
+      }
+      &.indefini {
+        background: linear-gradient(to right, #aaa, lighten(#aaa, 5%));
+      }
+
+      position: absolute;
+      bottom: 3vh;
+      left: 0;
+      padding-top: 5px;
+      min-height: 5vh;
+      padding-bottom: 7px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+      0 3px 10px 0 rgba(0, 0, 0, 0.19);
+      color: #fff;
+      width: 80%;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      cursor: pointer;
+      transition: letter-spacing 200ms,
+      transform 200ms;
+      transform-origin: 0% 0%;
+
+      &:hover {
+        letter-spacing: 0.5px;
+        transform: scaleX(1.05);
+      }
+
+      span {
+        font-size: 1.2em;
+        font-weight: 100;
+        margin-left: 2vw;
+        text-transform: uppercase;
+      }
+
+    }
+  }
+}
+
+.liste {
+  .liste--element {
+    .montant {
+      margin-top: -5px;
+    }
+  }
+}
+
+.muanza-icon {
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+
+  sup {
+    margin-left: -5px;
+  }
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/*
+<<<<<<< HEAD
+<<<<<<< HEAD
+ * Metro 4 Components Library v4.3.0  (https://metroui.org.ua)
+=======
+ * Metro 4 Components Library v4.2.48  (https://metroui.org.ua)
+>>>>>>> master
+=======
+ * Metro 4 Components Library v4.2.49  (https://metroui.org.ua)
+>>>>>>> master
+ * Copyright 2012-2019 Sergey Pimenov
+ * Licensed under MIT
+ */
+ .sorting,
+ .sorting_asc,
+ .sorting_desc {
+   position: relative;
+   cursor: pointer;
+ }
+ .sorting:after,
+ .sorting_asc:after,
+ .sorting_desc:after {
+   position: absolute;
+   content: "";
+   width: 1rem;
+   height: 1rem;
+   left: 100%;
+   margin-left: -1.25rem;
+   top: 50%;
+   margin-top: -0.5rem;
+   font-size: 1rem;
+   line-height: 1;
+   color: #1d1d1d;
+ }
+ .sorting_asc {
+   background-color: #ebebeb;
+ }
+ .sorting_asc:after {
+   content: "\2191";
+ }
+ .sorting_desc {
+   background-color: #ebebeb;
+ }
+ .sorting_desc:after {
+   content: "\2193";
+ }
+ .dataTables_length label {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+       -ms-flex-flow: row nowrap;
+           flex-flow: row nowrap;
+   -webkit-box-align: center;
+       -ms-flex-align: center;
+           align-items: center;
+ }
+ .dataTables_length label select {
+   margin: 0 10px;
+   width: 100px;
+ }
+ .dataTables_filter label {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+       -ms-flex-flow: row nowrap;
+           flex-flow: row nowrap;
+   -webkit-box-align: center;
+       -ms-flex-align: center;
+           align-items: center;
+ }
+ .dataTables_filter label input {
+   width: 200px;
+   margin-left: 10px;
+ }
+ .dataTables_paginate {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -ms-flex-wrap: wrap;
+       flex-wrap: wrap;
+   list-style: none inside;
+   padding: 0;
+   -webkit-user-select: none;
+      -moz-user-select: none;
+       -ms-user-select: none;
+           user-select: none;
+   -webkit-box-pack: center;
+       -ms-flex-pack: center;
+           justify-content: center;
+ }
+ .dataTables_paginate .previous,
+ .dataTables_paginate .next,
+ .dataTables_paginate span a {
+   cursor: pointer;
+   display: block;
+   position: relative;
+   padding: 0.5rem 0.75rem;
+   line-height: 1;
+   font-size: 1rem;
+   text-decoration: none;
+   background-color: #ffffff;
+   color: #1d1d1d;
+   border: 1px solid #dfdfdf;
+   margin: 0.25rem;
+ }
+ .dataTables_paginate .previous:hover,
+ .dataTables_paginate .next:hover,
+ .dataTables_paginate span a:hover {
+   background-color: rgba(29, 29, 29, 0.1);
+ }
+ .dataTables_paginate span {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+       -ms-flex-flow: row wrap;
+           flex-flow: row wrap;
+ }
+ .dataTables_paginate .current {
+   background-color: #e4e4e4;
+ }
+ .dataTables_wrapper {
+   margin-top: 10px;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+       -ms-flex-flow: row wrap;
+           flex-flow: row wrap;
+   -webkit-box-pack: justify;
+       -ms-flex-pack: justify;
+           justify-content: space-between;
+   -ms-flex-line-pack: center;
+       align-content: center;
+ }
+ .dataTables_length,
+ .dataTables_filter {
+   -webkit-box-flex: 1;
+       -ms-flex: 1;
+           flex: 1;
+ }
+ .dataTables_paginate,
+ .dataTables_info,
+ .dataTable {
+   width: 100%;
+ }
+ .dataTables_info {
+   line-height: 42px;
+   text-align: center;
+ }
+ @media all and (min-width: 576px) {
+   .dataTables_filter label {
+     -webkit-box-pack: end;
+         -ms-flex-pack: end;
+             justify-content: flex-end;
+   }
+   .dataTables_length label {
+     -webkit-box-pack: start;
+         -ms-flex-pack: start;
+             justify-content: flex-start;
+   }
+ }
+ @media all and (min-width: 992px) {
+   .dataTables_paginate,
+   .dataTables_info {
+     width: auto;
+   }
+   .dataTables_info {
+     text-align: left;
+   }
+   .dataTables_paginate {
+     -webkit-box-pack: end;
+         -ms-flex-pack: end;
+             justify-content: flex-end;
+   }
+ }

@@ -25,29 +25,35 @@
                             </h2>
                         </div>
                         <div class="contenu">
-                            <table class="table table-border row-border cell-border">
+                            <table class="table  compact table-border row-border cell-border">
                                 <thead>
                                     <tr>
                                         <th>Modèle</th>
                                         <th>Imm.</th>
-                                        <th>Date Imm.</th>
-                                        <th>N° Chassis</th>
-                                        <th>Carburant</th>
-                                        <th>Valeur Catalogue</th>
-                                        <th>valeur Achat</th>
-                                        <th>valeur Résiduelle</th>
+                                        <th>Chev.</th>
+                                        <th>Date Acq.</th>
+                                        <th>Type</th>
+                                        <th>Site</th>
+                                        <th>Etat</th>
+                                        <th>Propriété</th>
+                                        <th>Valeur Achat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let vehicule of vehicules" (click)="edit(vehicule)" style="cursor: pointer;">
                                         <td>{{vehicule.modele}}</td>
                                         <td>{{vehicule.immatriculation}}</td>
-                                        <td>{{vehicule.dateImmatriculation | date: 'yyyy-MM-dd'}}</td>
-                                        <td>{{vehicule.numeroChassis}}</td>
-                                        <td>{{vehicule.typeCarburant}}</td>
-                                        <td>{{vehicule.valeurCatalogue ? vehicule.valeurCatalogue:0}}</td>
+                                        <td>{{vehicule.chevaux}}</td>
+                                        <td>{{vehicule.dateAcquisition | date: 'yyyy-MM-dd'}}</td>
+                                        <td>{{vehicule.type}}</td>
+                                        <td>
+                                            {{vehicule.siteActuel ? vehicule.siteActuel.nom: 'Indéfini'}}
+                                        </td>
+                                        <td>{{vehicule.etat}}</td>
+                                        <td>
+                                            {{vehicule.proprietaire ? 'Proprietaire': vehicule.leasing}}
+                                        </td>
                                         <td>{{vehicule.valeurAchat ? vehicule.valeurAchat:0}}</td>
-                                        <td>{{vehicule.valeurResiduelle ? vehicule.valeurResiduelle: 0}}</td>
                                     </tr>
                                 </tbody>
                             </table>

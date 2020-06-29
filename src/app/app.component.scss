@@ -1,3 +1,29 @@
+// SCROLLBAR DU MENU GAUCHE
+.cell-lg-2 {
+    /* width */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #ffaaaa; // ROUGE
+        background: lighten(#0072ff, 20%); // BLEU
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #e52d27; // ROUGE
+        background: #0072ff; // BLEU
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b31217; // ROUGE
+        background: darken(#0072ff, 15%); // ROUGE
+    }
+}
+
 .hauteur70 {
     height: 50vmin;
 }
@@ -5,20 +31,12 @@
 .mainMuanza {
     margin-top: -47vmin;
 }
+
 .muanza-container-fluid {
     padding: 25px;
     padding-top: 0px;
 }
 
-.back-gradient {
-    background: #e52d27;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #b31217, #e52d27);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #b31217, #e52d27);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}
 
 .instagram {
     background: linear-gradient(to bottom, #833ab4, #fd1d1d, #fcb045);
@@ -107,7 +125,7 @@ a {
     }
 }
 
-.ombre{
+.ombre {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 

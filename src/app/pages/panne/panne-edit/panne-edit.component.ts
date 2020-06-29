@@ -6,6 +6,7 @@ import { Panne } from 'src/app/models/panne.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IdentificationService } from 'src/app/services/identification.service';
 import * as firebase from 'firebase';
+import { Vehicule } from 'src/app/models/vehicule.model';
 
 @Component({
   selector: 'app-panne-edit',
@@ -106,6 +107,19 @@ export class PanneEditComponent implements OnInit {
     return currentDate.toISOString().substring(0, 10);
   }
 
+  updateVehicule(vehicule: Vehicule) {
+    console.log('Update begin');
+    const db = firebase.firestore();
+    db.collection('vehicules').doc(vehicule.id).get().then((v) => {
+      const voiture = v.data();
+      voiture.etat = 'En panne';
+      console.log('Updating');
+      db.collection('vehicules').doc(vehicule.id).set(voiture).then(() => {
+        console.log('Update complete');
+      });
+    });
+  }
+
   onPanneFormSubmit() {
     const valueForm = this.panneForm.value;
     console.log(valueForm);
@@ -116,6 +130,7 @@ export class PanneEditComponent implements OnInit {
     panne.date = new Date(valueForm.date);
     panne.vehicule = valueForm.vehicule;
     panne.description = valueForm.description;
+
     if (panne.vehicule.conducteur) {
       panne.conducteur = panne.vehicule.conducteur;
     }
@@ -129,6 +144,7 @@ export class PanneEditComponent implements OnInit {
       // Metro.notify.create('Enregistré', '', { cls: 'success' });
       this.router.navigate(['panne']);
     });
+    this.updateVehicule(panne.vehicule);
   }
 
 

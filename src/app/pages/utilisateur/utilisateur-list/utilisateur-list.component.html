@@ -1,0 +1,72 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Utilisateurs
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-9">
+                    <div class="board">
+                        <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
+                        
+                        <div class="entete">
+                        </div>
+                        <div class="contenu">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover">
+                                <thead>
+                                    <tr>
+
+                                        <th>Noms</th>
+                                        <th>Prénoms</th>
+                                        <th>Login</th>
+                                        <th>Type</th>
+                                        <th>Site</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let utilisateur of utilisateurs" (click)="edit(utilisateur)" style="cursor: pointer;">
+                                        <td>{{utilisateur.noms}}</td>
+                                        <td>
+                                            {{utilisateur.prenoms}}
+                                        </td>
+                                        <td>
+                                            {{utilisateur.email}}
+                                        </td>
+                                        <td>
+                                            {{utilisateur.type}}
+                                        </td>
+                                        <td>
+                                            {{utilisateur.site.nom}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell-lg-3">
+                    <div class="board">
+                    <div class="entete">
+                        <h2>
+                            Nombre de responsables par site 
+                        </h2>
+                        <div *ngIf="responsables && responsables.length > 0">
+                            <table class="table">
+                                <tbody>
+                                    <tr *ngFor="let site of sites">
+                                        <td>{{site.nom}}</td>
+                                        <td>{{getResponsablesOfSite(site).length}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Renouvellement de la carte grise
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-6">
+                    <div class="board">
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <h4 *ngIf="vehicule">
+                                {{vehicule.modele}}
+                                -
+                                {{vehicule.immatriculation}}
+                            </h4>
+
+                            <form [formGroup]="carteForm" (ngSubmit)="onCarteFormSubmit()">
+
+                                <div class="cell-lg-12">
+                                    <input type="date" data-prepend="Nouvelle date de validilité" formControlName="dateFinCarteGrise"
+                                        data-role="input">
+                                </div>
+                                <div class="cell-lg-12">
+                                    <button class="button" [disabled]="carteForm.invalid">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

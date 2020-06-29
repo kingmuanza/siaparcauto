@@ -3,60 +3,192 @@
         <h1>
             {{vehicule ? vehicule.immatriculation: 'Ajouter un véhicule'}}
         </h1>
-
     </div>
     <div class="contenu">
         <div class="boards">
             <div class="row">
-                <div class="cell-lg-6">
+                <div class="cell-lg-12">
                     <div class="board">
                         <div class="entete">
-                            <h2>
-                                Informations
-                            </h2>
                         </div>
                         <div class="contenu">
 
                             <form [formGroup]="vehiculeForm" (ngSubmit)="onVehiculeFormSubmit()">
-                                <div class="cell-lg-12">
-                                    <input formControlName="modele" data-role="input" data-prepend="Modèle">
+                                <h2>
+                                    Informations générales
+                                </h2>
+                                <div class="row">
+                                    <div class="cell-lg-6">
+                                        <input formControlName="immatriculation" data-role="input"
+                                            data-prepend="Immatricuation">
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <input formControlName="modele" data-role="input" data-prepend="Modèle">
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <input formControlName="chevaux" data-role="input" data-prepend="Chevaux">
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <input data-prepend="Date Immatricuation" type="date"
+                                            formControlName="dateImmatriculation" data-role="input">
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <input data-prepend="Date Fin Imm." type="date"
+                                            formControlName="dateFinCarteGrise" data-role="input">
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <input data-prepend="Date Acquisition" type="date"
+                                            formControlName="dateAcquisition" data-role="input">
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <input formControlName="chassis" data-role="input"
+                                            data-prepend="Numéro de chassis">
+                                    </div>
                                 </div>
-                                <div class="cell-lg-12">
-                                    <input formControlName="immatriculation" data-role="input" data-prepend="Immatricuation">
+
+                                <h2>
+                                    Situation dans l'entreprise
+                                </h2>
+                                <div class="row">
+                                    <div class="cell-lg-6">
+                                        <label>
+                                            Choisissez le site d'affectation
+                                        </label>
+                                        <select formControlName="siteActuel">
+                                            <ng-container *ngFor="let site of sites">
+                                                <option [ngValue]="site">
+                                                    {{site.nom}}
+                                                </option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <label>
+                                            Choisissez la direction
+                                        </label>
+                                        <select formControlName="direction">
+                                            <ng-container *ngFor="let departement of departements">
+                                                <option [ngValue]="departement">
+                                                    <ng-container
+                                                        *ngFor="let item of generateArray(departement.niveau)">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </ng-container>
+                                                    {{departement.nom}}
+                                                </option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <label>
+                                            Type de carburant
+                                        </label>
+                                        <select formControlName="carburant">
+                                            <option value="DIESEL">
+                                                DIESEL
+                                            </option>
+                                            <option value="GASOIL">
+                                                GASOIL
+                                            </option>
+                                            <option value="ELECTRIQUE">
+                                                ELECTRIQUE
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="cell-lg-6">
+
+                                        <label>
+                                            Quel est l'usage du véhicule ?
+                                        </label>
+                                        <select formControlName="type">
+                                            <option value="Touristique">
+                                                Touristique
+                                            </option>
+                                            <option value="Fonction">
+                                                Fonction
+                                            </option>
+                                            <option value="Utilitaire">
+                                                Utilitaire
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="cell-lg-6">
+                                        <label>
+                                            Quel est l'état du véhicule ?
+                                        </label>
+                                        <select formControlName="etat">
+                                            <option value="En circulation">
+                                                En circulation
+                                            </option>
+                                            <option value="Vétuste">
+                                                Vétuste
+                                            </option>
+                                            <option value="En panne">
+                                                En panne
+                                            </option>
+                                            <option value="Epave">
+                                                Epave
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="cell-lg-12">
+                                        <input formControlName="etiquettes" data-role="input" data-prepend="Etiquettes">
+                                    </div>
                                 </div>
-                                <div class="cell-lg-12">
-                                    <input data-prepend="Date Immatricuation" type="date" formControlName="dateImmatriculation" data-role="input">
-                                    
+
+                                <h2>
+                                    Propriété
+                                </h2>
+                                <div class="row">
+                                    <div class="cell-lg-4">
+                                        <input formControlName="proprietaire" [value]="true" data-caption="Propriétaire"
+                                            type="radio" data-role="radio">
+                                        <input formControlName="proprietaire" [value]="false" data-caption="Leasing"
+                                            type="radio" data-role="radio">
+                                    </div>
+                                    <div class="cell-lg-2" *ngIf="leasing">
+                                        <div style="padding-top: 10px;">
+                                            <label>Propriété de</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="cell-lg-6" *ngIf="leasing">
+                                        <select formControlName="leasing">
+                                            <option value="BICEC">
+                                                BICEC
+                                            </option>
+                                            <option value="ALIOS">
+                                                ALIOS
+                                            </option>
+                                            <option value="SCE">
+                                                SCE
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="cell-lg-12">
-                                    <input formControlName="chassis" data-role="input" data-prepend="Numéro de chassis">
+
+                                <h2>
+                                    Coûts
+                                </h2>
+                                <div class="row">
+                                    <div class="cell-lg-4">
+                                        <input type="number" formControlName="catalogue" data-role="input"
+                                            data-prepend="Valeur catalogue">
+                                    </div>
+                                    <div class="cell-lg-4">
+                                        <input type="number" formControlName="achat" data-role="input"
+                                            data-prepend="Valeur d'achat">
+                                    </div>
+                                    <div class="cell-lg-4">
+                                        <input type="number" formControlName="residuelle" data-role="input"
+                                            data-prepend="Valeur residuelle">
+                                    </div>
                                 </div>
-                                <div class="cell-lg-12">
-                                    <select formControlName="carburant" data-role="select" data-prepend="Type de carburant">
-                                        <option value="DIESEL">
-                                            DIESEL
-                                        </option>
-                                        <option value="GASOIL">
-                                            GASOIL
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="cell-lg-12">
-                                    <input formControlName="etiquettes" data-role="input" data-prepend="Etiquettes">
-                                </div>
-                                <div class="cell-lg-12">
-                                    <input type="number" formControlName="catalogue" data-role="input" data-prepend="Valeur catalogue">
-                                </div>
-                                <div class="cell-lg-12">
-                                    <input type="number" formControlName="achat" data-role="input" data-prepend="Valeur d'achat">
-                                </div>
-                                <div class="cell-lg-12">
-                                    <input type="number" formControlName="residuelle" data-role="input" data-prepend="Valeur residuelle">
-                                </div>
-                                <div class="cell-lg-12">
-                                    <button class="button" [disabled]="vehiculeForm.invalid">
-                                        Enregistrer
-                                    </button>
+                                <div class="row">
+                                    <div class="cell-lg-12">
+                                        <button class="button back-gradient fg-white" [disabled]="vehiculeForm.invalid">
+                                            Enregistrer
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

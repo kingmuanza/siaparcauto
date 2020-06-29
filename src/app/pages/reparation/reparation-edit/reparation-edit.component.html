@@ -25,11 +25,13 @@
                                 <div class="cell-lg-12">
                                     <label>Véhicule *</label>
                                     <select formControlName="vehicule">
-                                        <option *ngFor="let vehicule of vehicules"
+                                        <ng-container *ngFor="let vehicule of vehicules">         
+                                            <option *ngIf="vehicule.etat && vehicule.etat ==='En panne'"
                                             [selected]="reparation && reparation.vehicule.id===vehicule.id"
                                             [ngValue]="vehicule">
                                             {{vehicule.modele}} - {{vehicule.immatriculation}}
                                         </option>
+                                    </ng-container>
                                     </select>
                                     <small>Choisissez le véhicule</small>
                                 </div>

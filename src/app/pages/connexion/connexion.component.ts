@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as firebase from 'firebase';
 import { IdentificationService } from 'src/app/services/identification.service';
 import { Utilisateur } from 'src/app/models/utilisateur.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { notifierErreur } from '../../../assets/js/muanza';
 
 @Component({
   selector: 'app-connexion',
@@ -16,6 +16,7 @@ export class ConnexionComponent implements OnInit {
   connexionForm: FormGroup;
   utilisateur: Utilisateur;
   utilisateurSubscription: Subscription;
+  enSynchronisation = false;
 
   constructor(private router: Router, private idService: IdentificationService, private formBuilder: FormBuilder) { }
 
@@ -25,10 +26,6 @@ export class ConnexionComponent implements OnInit {
       this.utilisateur = utilisateur;
     });
     this.idService.emit();
-    this.idService.signIn('muanza@gmail.com', '123456').then(() => {
-      console.log('Authentification réussie');
-      this.router.navigate(['dashboard']);
-    });
   }
 
   initConnexionForm() {
@@ -39,12 +36,30 @@ export class ConnexionComponent implements OnInit {
   }
 
   onConnexionFormSubmit() {
+
+    const connexion = setTimeout(() => {
+      notifierErreur('Temps de réponse du serveur trop long. Veuillez recharger la page !');
+      this.initConnexionForm();
+      this.enSynchronisation = false;
+    }, 5000);
+
+    this.enSynchronisation = true;
+    console.log('Connexion');
     const valueForm = this.connexionForm.value;
     const email = valueForm.login;
     const passe = valueForm.passe;
-    this.idService.signIn(email, passe).then(() => {
+    this.idService.signIn(email, passe).then((utilisateur) => {
       console.log('Authentification réussie');
       this.router.navigate(['dashboard']);
+      console.log(utilisateur);
+      clearTimeout(connexion);
+      this.enSynchronisation = false;
+    }).catch((e) => {
+      console.log('Erreurururue');
+      notifierErreur('Login ou mot de passe incorrect !');
+      clearTimeout(connexion);
+      this.initConnexionForm();
+      this.enSynchronisation = false;
     });
   }
 

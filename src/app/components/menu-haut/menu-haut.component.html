@@ -1,15 +1,14 @@
 <div *ngIf="utilisateur" class="" style="position: absolute; top: 0; left: 0; width: 100%; opacity: 1; ">
-    <div
-        style="position: fixed; width: 100%;padding-left: 20px; padding-top: 5px; margin-right: 17px;">
+    <div style="position: fixed; width: 82%;padding-left: 20px; padding-right: 0px;; padding-top: 5px; margin-right: 17px;">
         <div class="row">
             <div class="cell-lg-7">
                 <span class="mif-search fg-white"
                     style="position: absolute; padding: 5px; padding-top: 7px; padding-left: 20px;">
 
                 </span>
-                <input type="text">
+                <input  [(ngModel)]="recherche" (ngModelChange)="rechercher($event)" type="text">
             </div>
-            <div class="cell-lg-1 fg-white">
+            <div class="cell-lg-2 fg-white">
                 <span (click)="addVehicule()" class="muanza-icon">
                     <span class="mif-drive-eta">
                     </span>
@@ -29,26 +28,23 @@
                     </sup>
                 </span>
             </div>
-            <div class="cell-lg-4 hideOnMobile">
-                <div class="row">
-                    <div class="cell-lg-2 cell-2 fg-white" style="text-align: right;">
-                        <div style="margin-top: -3px;;">
-                            <img src="../assets/img/verlaine.jfif"
-                                style="height: 35px; border: 0px solid #8e2de2;">
-                        </div>
+            <div title="Déconnexion" style="cursor: pointer;" class="cell-lg-2" (click)="deconnexion()">
+                <div class="text-right fg-white">
+                    <span class="">
+                        {{utilisateur.noms ? utilisateur.noms: emailSplit(utilisateur.email)}}
+                    </span>
+                    <div style="margin-top: -10px;;">
+                        <small>
+                            {{utilisateur.type ? utilisateur.type : 'Administrateur'}}
+                            {{utilisateur.site ? utilisateur.site.nom : ''}}
+                        </small>
                     </div>
-                    <div class="cell-lg-10 cell-10 fg-white">
-                        <div style="position: absolute; padding: 5px; margin-top: -10px; padding-left: 0px;">
-                            <span class="">
-                                {{utilisateur.noms ? utilisateur.noms: emailSplit(utilisateur.email)}}
-                            </span>
-                            <div style="margin-top: -10px;;">
-                                <small>
-                                    Administrateur
-                                </small>
-                            </div>
-                        </div>
-                    </div>
+
+                </div>
+            </div>
+            <div class="cell-lg-1">
+                <div style="margin-top: 5px;">
+                    <img src="../../../assets/img/user.png" style="height: 32px; border-radius: 50%;">
                 </div>
             </div>
         </div>

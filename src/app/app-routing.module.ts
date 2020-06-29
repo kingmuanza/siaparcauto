@@ -23,6 +23,18 @@ import { AssuranceListComponent } from './pages/assurance/assurance-list/assuran
 import { AssuranceEditComponent } from './pages/assurance/assurance-edit/assurance-edit.component';
 import { VehiculeSuiviComponent } from './pages/vehicule/vehicule-suivi/vehicule-suivi.component';
 import { VehiculeViewComponent } from './pages/vehicule/vehicule-view/vehicule-view.component';
+import { SiteListComponent } from './pages/site/site-list/site-list.component';
+import { SiteEditComponent } from './pages/site/site-edit/site-edit.component';
+import { LeasingListComponent } from './pages/leasing/leasing-list/leasing-list.component';
+import { LeasingEditComponent } from './pages/leasing/leasing-edit/leasing-edit.component';
+import { DepartementListComponent } from './pages/departement/departement-list/departement-list.component';
+import { DepartementEditComponent } from './pages/departement/departement-edit/departement-edit.component';
+import { UtilisateurListComponent } from './pages/utilisateur/utilisateur-list/utilisateur-list.component';
+import { UtilisateurEditComponent } from './pages/utilisateur/utilisateur-edit/utilisateur-edit.component';
+import { VisiteSuiviComponent } from './pages/visite/visite-suivi/visite-suivi.component';
+import { RechercherComponent } from './pages/vehicule/rechercher/rechercher.component';
+import { CarteGriseSuiviComponent } from './pages/carte-grise/carte-grise-suivi/carte-grise-suivi.component';
+import { CarteGriseEditComponent } from './pages/carte-grise/carte-grise-edit/carte-grise-edit.component';
 
 
 const routes: Routes = [
@@ -35,6 +47,10 @@ const routes: Routes = [
 
   { path: 'vehicules', canActivate: [AuthGuard], component: VehiculeSuiviComponent },
   { path: 'vehicules/:id', canActivate: [AuthGuard], component: VehiculeViewComponent },
+  { path: 'rechercher', canActivate: [AuthGuard], component: RechercherComponent },
+  { path: 'rechercher/:mot', canActivate: [AuthGuard], component: RechercherComponent },
+  { path: 'cartesgrises', canActivate: [AuthGuard], component: CarteGriseSuiviComponent },
+  { path: 'cartesgrises/:id', canActivate: [AuthGuard], component: CarteGriseEditComponent },
 
   { path: 'conducteur', component: ConducteurListComponent },
   { path: 'conducteur/edit', canActivate: [AuthGuard], component: ConducteurEditComponent },
@@ -63,10 +79,27 @@ const routes: Routes = [
   { path: 'visite', component: VisiteListComponent },
   { path: 'visite/edit', canActivate: [AuthGuard], component: VisiteEditComponent },
   { path: 'visite/edit/:id', canActivate: [AuthGuard], component: VisiteEditComponent },
+  { path: 'visites', component: VisiteSuiviComponent },
 
   { path: 'assurance', component: AssuranceListComponent },
   { path: 'assurance/edit', canActivate: [AuthGuard], component: AssuranceEditComponent },
   { path: 'assurance/edit/:id', canActivate: [AuthGuard], component: AssuranceEditComponent },
+
+  { path: 'site', component: SiteListComponent },
+  { path: 'site/edit', canActivate: [AuthGuard], component: SiteEditComponent },
+  { path: 'site/edit/:id', canActivate: [AuthGuard], component: SiteEditComponent },
+
+  { path: 'leasing', component: LeasingListComponent },
+  { path: 'leasing/edit', canActivate: [AuthGuard], component: LeasingEditComponent },
+  { path: 'leasing/edit/:id', canActivate: [AuthGuard], component: LeasingEditComponent },
+
+  { path: 'departement', component: DepartementListComponent },
+  { path: 'departement/edit', canActivate: [AuthGuard], component: DepartementEditComponent },
+  { path: 'departement/edit/:id', canActivate: [AuthGuard], component: DepartementEditComponent },
+
+  { path: 'utilisateur', component: UtilisateurListComponent },
+  { path: 'utilisateur/edit', canActivate: [AuthGuard], component: UtilisateurEditComponent },
+  { path: 'utilisateur/edit/:id', canActivate: [AuthGuard], component: UtilisateurEditComponent },
 
   { path: '**', redirectTo: 'connexion' }
 ];

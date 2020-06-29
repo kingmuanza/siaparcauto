@@ -16,7 +16,8 @@ form {
     }
 }
 
-$primaire: #e52d27;
+$primaire: #e52d27; // Rouge
+$primaire: #0072ff; // Bleu
 
 .boards {
     margin-top: 10px;
@@ -24,7 +25,7 @@ $primaire: #e52d27;
     .board {
         border: 1px solid $primaire;
         height: 60vh;
-        background-color: rgba(255, 255, 255, 1);
+        background-color: rgba(255, 255, 255, 0.99);
 
         .entete {
             padding-left: 1.5vw;
@@ -53,6 +54,7 @@ $primaire: #e52d27;
             padding-bottom: 7px;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
             background: linear-gradient(to right, #b31217, #e52d27);
+            background: linear-gradient(to right, #0072ff, #1fc8f8);
             color: #fff;
             width: 80%;
             border-top-right-radius: 0px;

@@ -1,24 +1,29 @@
-<h6 style="margin-left: 20px; padding-top: 2vh;;">
-    SIA PARCAUTO
-</h6>
+<!--
+    <h6 style="margin-left: 20px; padding-top: 2vh;;">
+        SIA PARCAUTO
+    </h6>
+-->
+<div style="padding-left: 10px; padding-top: 4vh; padding-bottom: 2vh;">
+    <img src="../../../assets/img/logo CAMTEL.jpg" style="width: 80px;;">
+</div>
 <div class="muanza-menu">
     <div class="muanza-menu-item-group">
-        <div routerLink="dashboard" routerLinkActive="active" class="muanza-menu-item" style="">
+        <a routerLink="dashboard" routerLinkActive="active" class="muanza-menu-item" style="">
             <small class="mif-chart-pie muanza-menu-icon">
 
             </small>
             <small>
                 Tableau de bord
             </small>
-        </div>
-        <div class="muanza-menu-item" routerLink="affectation" routerLinkActive="active">
+        </a>
+        <a *ngIf="voirSuivi" class="muanza-menu-item" routerLink="affectation" routerLinkActive="active">
             <small class="mif-key muanza-menu-icon">
 
             </small>
             <small>
                 Affectations de Véhicule
             </small>
-        </div>
+        </a>
         <!--
         <div class="muanza-menu-item" style="">
             <a routerLink="/">
@@ -56,11 +61,11 @@
         </div>
     -->
     </div>
-    <div id="dropdown_toggle_suivi" class="muanza-menu-title">
+    <div *ngIf="voirSuivi" id="dropdown_toggle_suivi" class="muanza-menu-title">
         Suivi
     </div>
-    <div class="muanza-menu-item-group">
-        <div routerLink="vehicules" routerLinkActive="active" class="muanza-menu-item">
+    <div *ngIf="voirSuivi" class="muanza-menu-item-group">
+        <a routerLink="vehicules" routerLinkActive="active" class="muanza-menu-item">
             <small class="mif-drive-eta muanza-menu-icon" style="">
 
             </small>
@@ -68,29 +73,47 @@
             <small>
                 Véhicules
             </small>
-        </div>
+        </a>
+        <a routerLink="visites" routerLinkActive="active" class="muanza-menu-item">
+            <small class="mif-clipboard muanza-menu-icon" style="">
+
+            </small>
+
+            <small>
+                Visites Techniques
+            </small>
+        </a>
+        <a routerLink="cartesgrises" routerLinkActive="active" class="muanza-menu-item">
+            <small class="mif-featured-play-list muanza-menu-icon" style="">
+
+            </small>
+
+            <small>
+                Cartes Grises
+            </small>
+        </a>
     </div>
     <div id="dropdown_toggle_reporting" class="muanza-menu-title">
         Reporting
     </div>
     <div class="muanza-menu-item-group">
-        <div class="muanza-menu-item" routerLink="kilometrage" routerLinkActive="active">
+        <a class="muanza-menu-item" routerLink="kilometrage" routerLinkActive="active">
             <small class="mif-history muanza-menu-icon">
 
             </small>
             <small>
                 Kilométrage
             </small>
-        </div>
-        <div class="muanza-menu-item" routerLink="ravitaillement" routerLinkActive="active">
+        </a>
+        <a *ngIf="voirSuivi" class="muanza-menu-item" routerLink="ravitaillement" routerLinkActive="active">
             <small class="mif-gas-station muanza-menu-icon">
 
             </small>
             <small>
                 Carburant
             </small>
-        </div>
-        <div class="muanza-menu-item" routerLink="panne" routerLinkActive="active">
+        </a>
+        <a class="muanza-menu-item" routerLink="panne" routerLinkActive="active">
             <small class="mif-drive-eta muanza-menu-icon">
 
             </small>
@@ -98,31 +121,31 @@
             <small>
                 Pannes
             </small>
-        </div>
-        <div class="muanza-menu-item" routerLink="reparation" routerLinkActive="active">
+        </a>
+        <a class="muanza-menu-item" routerLink="reparation" routerLinkActive="active">
             <small class="mif-tools muanza-menu-icon">
 
             </small>
             <small>
                 Réparations
             </small>
-        </div>
-        <div class="muanza-menu-item" routerLink="visite" routerLinkActive="active">
+        </a>
+        <a class="muanza-menu-item" routerLink="visite" routerLinkActive="active">
             <small class="mif-clipboard muanza-menu-icon">
 
             </small>
             <small>
                 Visites techniques
             </small>
-        </div>
-        <div class="muanza-menu-item" routerLink="assurance" routerLinkActive="active">
+        </a>
+        <a *ngIf="voirSuivi" class="muanza-menu-item" routerLink="assurance" routerLinkActive="active">
             <small class="mif-beenhere muanza-menu-icon">
 
             </small>
             <small>
                 Assurances
             </small>
-        </div>
+        </a>
     </div>
     <!--
     <div id="dropdown_toggle_planification" class="muanza-menu-title dropdown-toggle">
@@ -165,27 +188,59 @@
 
 -->
 
-    <div id="dropdown_toggle_1" class="muanza-menu-title">
+    <div *ngIf="voirParametres" id="dropdown_toggle_1" class="muanza-menu-title">
         Paramètres
     </div>
 
-    <div class="muanza-menu-item-group">
-        <div routerLink="/vehicule" routerLinkActive="active" class="muanza-menu-item">
+    <div *ngIf="voirParametres" class="muanza-menu-item-group">
+        <a routerLink="/vehicule" routerLinkActive="active" class="muanza-menu-item">
             <small class="mif-drive-eta muanza-menu-icon">
 
             </small>
             <small>
                 Véhicules
             </small>
-        </div>
-        <div routerLink="/conducteur" routerLinkActive="active" class="muanza-menu-item">
+        </a>
+        <a routerLink="/conducteur" routerLinkActive="active" class="muanza-menu-item">
             <small class="mif-user-check muanza-menu-icon">
 
             </small>
             <small>
                 Conducteurs
             </small>
-        </div>
+        </a>
+        <a routerLink="/leasing" routerLinkActive="active" class="muanza-menu-item">
+            <small class="mif-copyright muanza-menu-icon">
+
+            </small>
+            <small>
+                Leasing
+            </small>
+        </a>
+        <a routerLink="/departement" routerLinkActive="active" class="muanza-menu-item">
+            <small class="mif-organization muanza-menu-icon">
+
+            </small>
+            <small>
+                Départements
+            </small>
+        </a>
+        <a routerLink="/site" routerLinkActive="active" class="muanza-menu-item">
+            <small class="mif-location-city muanza-menu-icon">
+
+            </small>
+            <small>
+                Sites
+            </small>
+        </a>
+        <a routerLink="/utilisateur" routerLinkActive="active" class="muanza-menu-item">
+            <small class="mif-security muanza-menu-icon">
+
+            </small>
+            <small>
+                Utilisateurs
+            </small>
+        </a>
 <!--
         <div class="muanza-menu-item">
             <small class="mif-user muanza-menu-icon">
@@ -197,5 +252,21 @@
         </div>
 
     -->
+    </div>
+
+    <div *ngIf="utilisateur" id="dropdown_toggle_deconnexion" class="muanza-menu-title">
+        Déconnexion
+    </div>
+    <div *ngIf="voirParametres" class="muanza-menu-item-group">
+        <div (click)="deconnexion()" class="muanza-menu-item">
+            <small class="mif-settings-power muanza-menu-icon">
+
+            </small>
+            <small>
+                <b>
+                    Déconnexion
+                </b>
+            </small>
+        </div>
     </div>
 </div>

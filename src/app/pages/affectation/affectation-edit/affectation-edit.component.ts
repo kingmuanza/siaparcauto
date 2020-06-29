@@ -6,6 +6,7 @@ import { Affectation } from 'src/app/models/affectation.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IdentificationService } from 'src/app/services/identification.service';
 import * as firebase from 'firebase';
+import { muanza } from '../../../../assets/js/muanza';
 
 @Component({
   selector: 'app-affectation-edit',
@@ -22,12 +23,13 @@ export class AffectationEditComponent implements OnInit {
   CARBURANTS = ['DIESEL', 'GASOIL'];
   conducteurs = [];
   vehicules = [];
+  enSynchronisation = false;
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private route: ActivatedRoute, private idService: IdentificationService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-
+    this.enSynchronisation = true;
     this.initAffectationForm();
     this.getVehicules().then(() => {
       console.log('Vehiles OK');
@@ -37,6 +39,7 @@ export class AffectationEditComponent implements OnInit {
           const id = paramMap.get('id');
           if (id) {
             this.getAffectation(id).then(() => {
+              this.enSynchronisation = false;
               this.initAffectationForm();
             });
           }
@@ -85,7 +88,6 @@ export class AffectationEditComponent implements OnInit {
         this.affectation = resultat.data() as Affectation;
         resolve();
       });
-
     });
   }
 
@@ -128,15 +130,20 @@ export class AffectationEditComponent implements OnInit {
     const db = firebase.firestore();
     db.collection('affectations').doc(affectation.id).set(parse).then(() => {
       this.updateVehicule(affectation).then(() => {
+        muanza().notify.create('Enregistré avec succès', null, {
+          cls: 'success'
+        });
         this.router.navigate(['affectation']);
+      });
+    }).catch((e) => {
+      muanza().notify.create('Echec d\'enregistrement', null, {
+        cls: 'alert'
       });
     });
   }
 
   updateVehicule(affectation: Affectation) {
-
     return new Promise((resolve, reject) => {
-
       affectation.vehicule.conducteur = affectation.conducteur;
       const vehicule = JSON.parse(JSON.stringify(affectation.vehicule));
       const db = firebase.firestore();
@@ -144,6 +151,8 @@ export class AffectationEditComponent implements OnInit {
         console.log('Enregistré');
         // Metro.notify.create('Enregistré', '', { cls: 'success' });
         resolve();
+      }).catch((e) => {
+        reject(e);
       });
     });
   }

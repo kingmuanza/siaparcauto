@@ -21,7 +21,7 @@
                             </h2>
                         </div>
                         <div class="contenu">
-                            <table class="table table-border row-border cell-border">
+                            <table class="table  compact table-border row-border cell-border">
                                 <thead>
                                     <tr>
 
@@ -44,9 +44,10 @@
 
                                         </td>
                                         <td style="text-transform: uppercase;">
-                                            {{visite.conducteur.noms}}
-                                            {{visite.conducteur.prenoms}}
-
+                                            <span *ngIf="visite.conducteur">
+                                                {{visite.conducteur.noms}}
+                                                {{visite.conducteur.prenoms}}
+                                            </span>
                                         </td>
                                         <td>{{visite.prestataire}}</td>
                                         <td>{{visite.dateLimite | date: 'yyyy-MM-dd'}}</td>

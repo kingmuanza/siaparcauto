@@ -20,6 +20,13 @@ export class IdentificationService {
     this.utilisateurSubject.next(this.utilisateur);
   }
 
+  deconnexion() {
+    return new Promise((resolve, reject) => {
+      this.utilisateur = null;
+      resolve(null);
+    });
+  }
+
   signIn(email, passe) {
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(email, passe).then((credentials) => {
@@ -30,13 +37,15 @@ export class IdentificationService {
           this.utilisateur = utilisateur;
           this.emit();
           resolve(this.utilisateur);
-        }).catch(() => {
+        }).catch((e) => {
           console.log('Edition du profil');
+          reject(e);
         });
 
       }).catch((e) => {
         console.log('Erreur de connexion');
         console.log(e);
+        reject(e);
       });
     });
   }

@@ -1,0 +1,71 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Cartes Grises
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-12">
+                    <div class="board">
+                        <div *ngIf="enSynchronisation" data-role="progress" data-type="line" data-small="true"></div>
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <table class="table  compact table-border row-border cell-border">
+                                <thead>
+                                    <tr>
+                                        <th>Imm.</th>
+                                        <th>Modèle</th>
+                                        <th>Site</th>
+                                        <th>Etat</th>
+                                        <th>Date Validité</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let vehicule of vehicules">
+
+                                        <tr [ngClass]="{'expiree': differencesEnjour(vehicule.dateFinCarteGrise) >= 0, 'bientot': differencesEnjour(vehicule.dateFinCarteGrise) < 0}"
+                                            (click)="voir(vehicule)" style="cursor: pointer;">
+                                            <td>
+                                                {{vehicule.immatriculation}}
+                                            </td>
+                                            <td>
+                                                {{vehicule.modele}}
+                                            </td>
+                                            <td>
+                                                {{vehicule.siteActuel ? vehicule.siteActuel.nom: ''}}
+                                            </td>
+                                            <td>{{vehicule.etat}}</td>
+                                            <td>{{vehicule.dateFinCarteGrise | date: 'yyyy-MM-dd'}}</td>
+                                            <td>
+                                                <ng-container *ngIf="differencesEnjour(vehicule.dateFinCarteGrise) > 0">
+                                                    a éxpiré depuis {{differencesEnjour(vehicule.dateFinCarteGrise)}}
+                                                    jours
+                                                </ng-container>
+                                                <ng-container *ngIf="differencesEnjour(vehicule.dateFinCarteGrise) < 0">
+                                                    expire dans {{differencesEnjour(vehicule.dateFinCarteGrise)*-1}}
+                                                    jours
+                                                </ng-container>
+                                                <ng-container
+                                                    *ngIf="differencesEnjour(vehicule.dateFinCarteGrise) === 0">
+                                                    expire aujourd'hui
+                                                </ng-container>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

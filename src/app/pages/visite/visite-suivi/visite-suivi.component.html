@@ -1,0 +1,73 @@
+<div class="page">
+    <div class="entete">
+        <h1>
+            Alertes Visites Techniques
+            <span (click)="addVisite()" class="muanza-icon">
+                <span>
+                    +
+                </span>
+            </span>
+        </h1>
+
+    </div>
+    <div class="contenu">
+        <div class="boards">
+            <div class="row">
+                <div class="cell-lg-12">
+                    <div class="board">
+                        <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
+                        <div class="entete">
+                            <h2>
+                                Informations
+                            </h2>
+                        </div>
+                        <div class="contenu">
+                            <table class="table compact table-border row-border cell-border">
+                                <thead>
+                                    <tr>
+                                        <th>Imm.</th>
+                                        <th>Modèle</th>
+                                        <th>Site</th>
+                                        <th>Etat</th>
+                                        <th>Date Validité</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let visite of visites">
+
+                                        <tr [ngClass]="{'expiree': differencesEnjour(visite.dateLimite) >= 0, 'bientot': differencesEnjour(visite.dateLimite) < 0}"
+                                            (click)="edit(visite)" style="cursor: pointer;">
+                                            <td>
+                                                {{visite.vehicule.immatriculation}}
+                                            </td>
+                                            <td>
+                                                {{visite.vehicule.modele}}
+                                            </td>
+                                            <td>
+                                                {{visite.vehicule.siteActuel ? visite.vehicule.siteActuel.nom: ''}}
+                                            </td>
+                                            <td>{{visite.vehicule.etat}}</td>
+                                            <td>{{visite.dateLimite | date: 'yyyy-MM-dd'}}</td>
+                                            <td>
+                                                <ng-container *ngIf="differencesEnjour(visite.dateLimite) > 0">
+                                                    a éxpiré depuis {{differencesEnjour(visite.dateLimite)}} jours
+                                                </ng-container>
+                                                <ng-container *ngIf="differencesEnjour(visite.dateLimite) < 0">
+                                                    expire dans {{differencesEnjour(visite.dateLimite)*-1}} jours
+                                                </ng-container>
+                                                <ng-container *ngIf="differencesEnjour(visite.dateLimite) === 0">
+                                                    expire aujourd'hui
+                                                </ng-container>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

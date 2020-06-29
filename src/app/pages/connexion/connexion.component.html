@@ -1,3 +1,5 @@
+<div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
+                        
 <div [ngClass]="{'connexion': !utilisateur, 'page': true}">
     <div class="entete">
         <h1>
@@ -14,7 +16,7 @@
                     <input formControlName="passe" data-role="input" type="password" data-prepend="Mot de passe">
                 </div>
                 <div class="cell-lg-2">
-                    <button class="button" [disabled]="connexionForm.invalid">
+                    <button class="button" [disabled]="connexionForm.invalid || enSynchronisation">
                         Connexion
                     </button>
                 </div>

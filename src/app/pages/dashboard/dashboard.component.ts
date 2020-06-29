@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, AfterViewInit } from '@angular/core';
 import { Utilisateur } from 'src/app/models/utilisateur.model';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,14 +13,19 @@ import { Visite } from 'src/app/models/visite.technique.model';
 import { Assurance } from 'src/app/models/assurance.model';
 import * as firebase from 'firebase';
 import { Vehicule } from 'src/app/models/vehicule.model';
+import Chart from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('donut', { static: false }) donut: ElementRef;
+
+  vehicules = new Array<Vehicule>();
+  vehiculesResultats = new Array<Vehicule>();
   affectations = new Array<Affectation>();
   kilometrages = new Array<ReleveKilometrique>();
   ravitaillements = new Array<Ravitaillement>();
@@ -29,32 +34,171 @@ export class DashboardComponent implements OnInit {
   visites = new Array<Visite>();
   assurances = new Array<Assurance>();
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  utilisateur: Utilisateur;
+  utilisateurSubscription: Subscription;
+
+  voirParametres = false;
+  voirSuivi = false;
+
+  constructor(
+    private idService: IdentificationService,
+    private router: Router,
+    private renderer: Renderer2,
+    private route: ActivatedRoute) { }
+
+  ngAfterViewInit() {
+    // Graphiques
+    const donutCtx = this.donut.nativeElement.getContext('2d');
+
+    this.getVehicules().then(() => {
+      const EnCirculations = new Array<Vehicule>();
+      const Vetustes = new Array<Vehicule>();
+      const EnPannes = new Array<Vehicule>();
+      const Epaves = new Array<Vehicule>();
+      const reste = new Array<Vehicule>();
+
+      console.log('this.vehicules.length');
+      console.log(this.vehicules);
+      this.vehicules.forEach((vehicule) => {
+        if (vehicule.etat) {
+          if (vehicule.etat === 'En circulation') {
+            EnCirculations.push(vehicule);
+          }
+          if (vehicule.etat === 'Vétuste') {
+            Vetustes.push(vehicule);
+          }
+          if (vehicule.etat === 'En panne') {
+            EnPannes.push(vehicule);
+          }
+          if (vehicule.etat === 'Epave') {
+            Epaves.push(vehicule);
+          }
+        } else {
+          reste.push(vehicule);
+        }
+      });
+
+      const datas = {
+        labels: [
+          'En circulation',
+          'Vétuste',
+          'En panne',
+          'Epave',
+          'Indéfinis',
+        ],
+        datasets: [
+          {
+            data: [
+              EnCirculations.length,
+              Vetustes.length,
+              EnPannes.length,
+              Epaves.length,
+              reste.length
+            ],   // Example data
+            backgroundColor: [
+              '#0072ff',
+              '#76a346',
+              '#fa6800',
+              '#e52d27',
+              '#f1f1f1'
+            ]
+          }]
+      };
+
+      const chart = new Chart(
+        donutCtx,
+        {
+          type: 'pie',
+          data: datas,
+          options: {
+            cutoutPercentage: 0,
+            responsive: true,
+            animation: {
+              animateScale: true,
+              animateRotate: false
+            },
+            legend: {
+              display: true,
+              position: 'bottom'
+            },
+            layout: {
+              padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+              }
+            }
+          }
+        }
+      );
+    });
+  }
 
   ngOnInit() {
-    {
-        this.getAffectations().then(() => {
-          console.log('Affectations !');
-        });
-        this.getKilometrages().then(() => {
-          console.log('Affectations !');
-        });
-        this.getRavitaillements().then(() => {
-          console.log('Ravitaillements !');
-        });
-        this.getPannes().then(() => {
-          console.log('Pannes !');
-        });
-        this.getReparattions().then(() => {
-          console.log('Reoaraions !');
-        });
-        this.getVisites().then(() => {
-          console.log('Visites !');
-        });
-        this.getAssurances().then(() => {
-          console.log('Visites !');
-        });
+    this.utilisateurSubscription = this.idService.utilisateurSubject.subscribe((utilisateur) => {
+      this.utilisateur = utilisateur;
+      this.getVehicules();
+      if (this.utilisateur.type) {
+        if (this.utilisateur.type === 'Administrateur') {
+          this.voirParametres = true;
+          this.voirSuivi = true;
+        }
+        if (this.utilisateur.type === 'Responsable') {
+          this.voirParametres = false;
+          this.voirSuivi = true;
+        }
+      } else {
+        this.voirParametres = true;
       }
+    });
+    this.idService.emit();
+    {
+      this.getAffectations().then(() => {
+        console.log('Affectations !');
+      });
+      this.getKilometrages().then(() => {
+        console.log('Affectations !');
+      });
+      this.getRavitaillements().then(() => {
+        console.log('Ravitaillements !');
+      });
+      this.getPannes().then(() => {
+        console.log('Pannes !');
+      });
+      this.getReparattions().then(() => {
+        console.log('Reoaraions !');
+      });
+      this.getVisites().then(() => {
+        console.log('Visites !');
+      });
+      this.getAssurances().then(() => {
+        console.log('Visites !');
+      });
+    }
+  }
+
+  getVehicules() {
+    return new Promise((resolve, reject) => {
+      const db = firebase.firestore();
+      const collection = db.collection('vehicules');
+      let query;
+      if (this.utilisateur.type === 'Responsable') {
+        query = collection.where('siteActuel.id', '==', this.utilisateur.site.id);
+      } else {
+        query = collection;
+      }
+      query.get().then((resultats) => {
+        this.vehicules = new Array<Vehicule>();
+        this.vehiculesResultats = new Array<Vehicule>();
+        resultats.forEach(resultat => {
+          console.log(resultat.data());
+          this.vehicules.push(resultat.data());
+          this.vehiculesResultats.push(resultat.data());
+        });
+        resolve();
+      });
+    });
   }
 
 

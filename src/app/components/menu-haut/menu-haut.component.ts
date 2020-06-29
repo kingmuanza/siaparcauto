@@ -14,13 +14,18 @@ export class MenuHautComponent implements OnInit {
   utilisateur: Utilisateur;
   utilisateurSubscription: Subscription;
 
-  constructor(private router: Router , private idService: IdentificationService) { }
+  constructor(private router: Router, private idService: IdentificationService) { }
 
   ngOnInit() {
     this.utilisateurSubscription = this.idService.utilisateurSubject.subscribe((utilisateur) => {
       this.utilisateur = utilisateur;
     });
     this.idService.emit();
+  }
+
+  rechercher(ev) {
+    console.log(ev);
+    this.router.navigate(['rechercher', ev]);
   }
 
   emailSplit(email: string) {
@@ -32,6 +37,15 @@ export class MenuHautComponent implements OnInit {
   }
   addConducteur() {
     this.router.navigate(['conducteur', 'edit']);
+  }
+
+  deconnexion() {
+    const oui = confirm('Etes vous sur de vouloir vous deconnecter ?');
+    if (oui) {
+      this.idService.deconnexion().then(() => {
+        this.router.navigate(['connexion']);
+      });
+    }
   }
 
 }
