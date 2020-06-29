@@ -3,6 +3,8 @@ import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { Visite } from 'src/app/models/visite.technique.model';
 import { Vehicule } from 'src/app/models/vehicule.model';
+import { Subject } from 'rxjs';
+import { DATATABLES_OPTIONS_LANGUAGE } from 'src/app/options/datatable.options';
 
 @Component({
   selector: 'app-visite-suivi',
@@ -11,13 +13,37 @@ import { Vehicule } from 'src/app/models/vehicule.model';
 })
 export class VisiteSuiviComponent implements OnInit {
 
-  visites = new Array<Visite>();
+  dtTrigger = new Subject();
+  dtOptions = {
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        text: 'Nouveau',
+        action: (e, dt, node, config) => {
+          this.add();
+        },
+        className: 'button muanza'
+      },
+      {
+        text: 'Actualiser',
+        action: (e, dt, node, config) => {
+          this.refresh();
+        },
+        className: 'button muanza'
+      },
+      { extend: 'print', text: 'Imprimer', className: 'button muanza' },
+      { extend: 'excel', text: 'Export vers Excel', className: 'button muanza' },
+    ],
+    language: DATATABLES_OPTIONS_LANGUAGE
+  };
   enSynchronisation = false;
+
+  visites = new Array<Visite>();
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.getVisites();
+    this.refresh();
   }
 
   async synchronisation() {
@@ -36,7 +62,8 @@ export class VisiteSuiviComponent implements OnInit {
     return vehicule;
   }
 
-  getVisites() {
+  refresh() {
+    this.dtTrigger = new Subject();
     const db = firebase.firestore();
     db.collection('visites').get().then((resultats) => {
       resultats.forEach(resultat => {
@@ -44,6 +71,7 @@ export class VisiteSuiviComponent implements OnInit {
         const visite = resultat.data() as Visite;
         this.visites.push(visite);
       });
+      this.dtTrigger.next();
       this.visites = this.visites.filter((visite) => {
         const dateLimite = new Date(visite.dateLimite);
         const diff = this.differencesEnjour(dateLimite);
@@ -69,7 +97,7 @@ export class VisiteSuiviComponent implements OnInit {
   edit(visite) {
     this.router.navigate(['visite', 'edit', visite.id]);
   }
-  addVisite() {
+  add() {
     this.router.navigate(['visite', 'edit']);
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Vehicule } from 'src/app/models/vehicule.model';
+import { Subject } from 'rxjs';
+import { DATATABLES_OPTIONS_LANGUAGE } from 'src/app/options/datatable.options';
 
 @Component({
   selector: 'app-carte-grise-suivi',
@@ -10,15 +12,40 @@ import { Vehicule } from 'src/app/models/vehicule.model';
 })
 export class CarteGriseSuiviComponent implements OnInit {
 
-  vehicules = new Array<Vehicule>();
+  dtTrigger = new Subject();
+  dtOptions = {
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        text: 'Nouveau',
+        action: (e, dt, node, config) => {
+          this.add();
+        },
+        className: 'button muanza'
+      },
+      {
+        text: 'Actualiser',
+        action: (e, dt, node, config) => {
+          this.refresh();
+        },
+        className: 'button muanza'
+      },
+      { extend: 'print', text: 'Imprimer', className: 'button muanza' },
+      { extend: 'excel', text: 'Export vers Excel', className: 'button muanza' },
+    ],
+    language: DATATABLES_OPTIONS_LANGUAGE
+  };
   enSynchronisation = false;
+
+  vehicules = new Array<Vehicule>();
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.getVehicules();
+    this.refresh();
   }
 
-  getVehicules() {
+  refresh() {
+    this.dtTrigger = new Subject();
     this.enSynchronisation = true;
     const db = firebase.firestore();
     db.collection('vehicules').get().then((resultats) => {
@@ -47,6 +74,10 @@ export class CarteGriseSuiviComponent implements OnInit {
         return new Date(a.dateFinCarteGrise).getTime() > new Date(b.dateFinCarteGrise).getTime() ? 1 : -1;
       });
       this.enSynchronisation = false;
+      this.dtTrigger.next();
+    }).catch(() => {
+      this.enSynchronisation = false;
+      this.dtTrigger.next();
     });
   }
 
@@ -58,7 +89,7 @@ export class CarteGriseSuiviComponent implements OnInit {
     return differenceEnJours;
   }
 
-  addCarte() {
+  add() {
 
   }
 

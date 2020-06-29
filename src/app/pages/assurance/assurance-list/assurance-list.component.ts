@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { notifierSucces, notifierErreur } from '../../../../assets/js/muanza';
+import { Subject } from 'rxjs';
+import { DATATABLES_OPTIONS_LANGUAGE } from 'src/app/options/datatable.options';
 
 @Component({
   selector: 'app-assurance-list',
@@ -12,14 +14,39 @@ export class AssuranceListComponent implements OnInit {
 
 
   assurances = [];
+  dtTrigger = new Subject();
+  dtOptions = {
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        text: 'Nouveau',
+        action: (e, dt, node, config) => {
+          this.add();
+        },
+        className: 'button muanza'
+      },
+      {
+        text: 'Actualiser',
+        action: (e, dt, node, config) => {
+          this.refresh();
+        },
+        className: 'button muanza'
+      },
+      { extend: 'print', text: 'Imprimer', className: 'button muanza' },
+      { extend: 'excel', text: 'Export vers Excel', className: 'button muanza' },
+    ],
+    language: DATATABLES_OPTIONS_LANGUAGE
+  };
   enSynchronisation = false;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.getAssurances();
+    this.refresh();
   }
 
-  getAssurances() {
+  refresh() {
+    this.dtTrigger = new Subject();
     console.log('getAssurances()');
     this.enSynchronisation = true;
     const db = firebase.firestore();
@@ -29,6 +56,7 @@ export class AssuranceListComponent implements OnInit {
         this.assurances.push(resultat.data());
         this.enSynchronisation = false;
       });
+      this.dtTrigger.next();
     }).catch((e) => {
       console.log('errueur');
       console.log(e);

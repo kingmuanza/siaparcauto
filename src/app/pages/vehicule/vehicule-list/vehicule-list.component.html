@@ -2,15 +2,6 @@
     <div class="entete">
         <h1>
             Véhicules
-            <span (click)="addVehicule()" class="muanza-icon">
-                <span class="mif-drive-eta">
-                </span>
-                <sup>
-                    <b>
-                        +
-                    </b>
-                </sup>
-            </span>
         </h1>
 
     </div>
@@ -19,13 +10,11 @@
             <div class="row">
                 <div class="cell-lg-12">
                     <div class="board">
-                        <div class="entete">
-                            <h2>
-                                Informations
-                            </h2>
-                        </div>
                         <div class="contenu">
-                            <table class="table  compact table-border row-border cell-border">
+                            <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
+    
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class="table row-border hover">
                                 <thead>
                                     <tr>
                                         <th>Modèle</th>

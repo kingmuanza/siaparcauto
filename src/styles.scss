@@ -57,12 +57,30 @@ $secondaire: lighten($primaire, 25%);
   border-radius: 0px;
 }
 
+.muanza-liste {
+  padding-top: 20px;
+  &-item {
+    border-bottom: 1px solid #eee;
+    padding: 5px;
+
+    transition: letter-spacing 200ms;
+    cursor: pointer;
+    &:hover {
+      letter-spacing: 1px;
+      font-weight: bold;
+      color: #333;
+      background-color: rgba(#001, 0.05);
+    }
+  }
+}
+
 .boards {
   margin-top: 10px;
 
   .board {
     border: 1px solid $primaire;
     background-color: rgba(255, 255, 255, 1);
+    padding-top: 10px;
     padding-bottom: 20px;
 
     &.panne {
@@ -78,17 +96,29 @@ $secondaire: lighten($primaire, 25%);
       border: 1px solid #aaa;
     }
 
+    &-content {
+      padding: 10px;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      .board-content-titre {
+        font-weight: bold;
+        font-size: 1.2em;
+        width: 80%;
+        line-height: 1.15;
+      }
+    }
+
     
     .entete {
       padding-left: 1.5vw;
       padding-right: 1.5vw;
-      margin-top: 10px;
+      margin-top: 15px;
 
       button {
         background: linear-gradient(to right, $primaire, lighten($primaire, 5%));
         color: #fff;
         margin-right: 10px;
-        width: 100%;
         span {
           margin-right: 10px;
         }

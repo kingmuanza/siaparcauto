@@ -12,7 +12,26 @@ import { DATATABLES_OPTIONS_LANGUAGE } from 'src/app/options/datatable.options';
 export class SiteListComponent implements OnInit, OnDestroy {
 
   dtTrigger = new Subject();
-  dtOptions: DataTables.Settings = {
+  dtOptions = {
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        text: 'Nouveau',
+        action: (e, dt, node, config) => {
+          this.add();
+        },
+        className: 'button muanza'
+      },
+      {
+        text: 'Actualiser',
+        action: (e, dt, node, config) => {
+          this.refresh();
+        },
+        className: 'button muanza'
+      },
+      { extend: 'print', text: 'Imprimer', className: 'button muanza' },
+      { extend: 'excel', text: 'Export vers Excel', className: 'button muanza' },
+    ],
     language: DATATABLES_OPTIONS_LANGUAGE
   };
   enSynchronisation = false;

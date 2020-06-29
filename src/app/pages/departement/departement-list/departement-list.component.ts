@@ -18,6 +18,10 @@ export class DepartementListComponent implements OnInit {
     this.getDepartements();
   }
 
+  refresh() {
+    this.getDepartements();
+  }
+
   getDepartements() {
     const db = firebase.firestore();
     db.collection('departements').get().then((resultats) => {
@@ -95,7 +99,7 @@ export class DepartementListComponent implements OnInit {
   edit(departement) {
     this.router.navigate(['departement', 'edit', departement.id]);
   }
-  addDepartement() {
+  add() {
     this.router.navigate(['departement', 'edit']);
   }
 

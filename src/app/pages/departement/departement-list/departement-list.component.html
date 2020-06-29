@@ -1,24 +1,22 @@
 <div class="page">
     <div class="entete">
         <h1>
-            Departements
-            <span (click)="addDepartement()" class="muanza-icon">
-                <span>
-                    +
-                </span>
-            </span>
+            Départements
         </h1>
 
     </div>
     <div class="contenu">
         <div class="boards">
             <div class="row">
-                <div class="cell-lg-12">
+                <div class="cell-lg-10">
                     <div class="board">
                         <div class="entete">
-                            <h2>
-                                Informations
-                            </h2>
+                            <button class="button" (click)="refresh()">
+                                Actualiser
+                            </button>
+                            <button class="button" (click)="add()">
+                                Nouveau
+                            </button>
                         </div>
                         <div class="contenu">
                             <table class="table table-border row-border cell-border">
@@ -35,7 +33,8 @@
                                         style="cursor: pointer;">
                                         <td>{{departement.code}}</td>
                                         <td>
-                                            <div [ngStyle]="{'margin-left': 50 * generateArray(departement.niveau).length +'px' }">
+                                            <div
+                                                [ngStyle]="{'margin-left': 50 * generateArray(departement.niveau).length +'px' }">
                                                 {{departement.nom}}
                                             </div>
                                         </td>

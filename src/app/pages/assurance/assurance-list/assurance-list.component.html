@@ -3,7 +3,6 @@
         <h1>
             Assurances
         </h1>
-
     </div>
     <div class="contenu">
         <div class="boards">
@@ -11,32 +10,10 @@
                 <div class="cell-lg-10">
                     <div class="board">
                         <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
-                        <div class="entete">
-                            <div class="row">
-                                <div class="cell-lg-2">
-                                    <button class="button small">
-                                        <span class="mif-refresh"></span>
-                                        Actualiser
-                                    </button>
-                                </div>
-                                <div class="cell-lg-2">
-                                    <button style="width: 100%;" class="button small" (click)="add()">
-                                        <span class="mif-add"></span>
-                                        Nouveau
-                                    </button>
-                                </div>
-                                <div class="cell-lg-2">
-                                </div>
-                                <div class="cell-lg-6">
-                                    <input 
-                                    class="input-small" 
-                                    placeholder="Rechercher..."
-                                    data-role="input">
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="contenu">
-                            <table class="table compact table-border row-border cell-border">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class="table row-border hover">
                                 <thead>
                                     <tr>
 

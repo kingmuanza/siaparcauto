@@ -11,11 +11,10 @@
                 <div class="cell-lg-9">
                     <div class="board">
                         <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
-                        
-                        <div class="entete">
-                        </div>
+
                         <div class="contenu">
-                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table row-border hover">
                                 <thead>
                                     <tr>
 
@@ -27,7 +26,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let utilisateur of utilisateurs" (click)="edit(utilisateur)" style="cursor: pointer;">
+                                    <tr *ngFor="let utilisateur of utilisateurs" (click)="edit(utilisateur)"
+                                        style="cursor: pointer;">
                                         <td>{{utilisateur.noms}}</td>
                                         <td>
                                             {{utilisateur.prenoms}}
@@ -49,21 +49,25 @@
                 </div>
                 <div class="cell-lg-3">
                     <div class="board">
-                    <div class="entete">
-                        <h2>
-                            Nombre de responsables par site 
-                        </h2>
-                        <div *ngIf="responsables && responsables.length > 0">
-                            <table class="table">
-                                <tbody>
-                                    <tr *ngFor="let site of sites">
-                                        <td>{{site.nom}}</td>
-                                        <td>{{getResponsablesOfSite(site).length}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="board-content">
+                            <div class="board-content-titre">
+                                Nombre de responsables par site
+                            </div>
+                            <div *ngIf="responsables && responsables.length > 0">
+                                <div class="muanza-liste">
+                                    <div *ngFor="let site of sites">
+                                        <div class="muanza-liste-item">
+                                            <div class="row no-gap">
+                                                <div class="cell-lg-8">{{site.nom | uppercase}}</div>
+                                                <div class="cell-lg-4 text-right">
+                                                    {{getResponsablesOfSite(site).length}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

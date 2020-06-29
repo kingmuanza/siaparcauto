@@ -3,20 +3,17 @@
         <h1>
             Conducteurs
         </h1>
-
     </div>
     <div class="contenu">
         <div class="boards">
             <div class="row">
                 <div class="cell-lg-12">
                     <div class="board">
-                        <div class="entete">
-                            <h2>
-                                Informations
-                            </h2>
-                        </div>
+                        <div *ngIf="enSynchronisation" data-role="activity" data-type="metro" data-style="color"></div>
+
                         <div class="contenu">
-                            <table class="table compact  table-border row-border cell-border">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class="table row-border hover">
                                 <thead>
                                     <tr>
                                         <th>Matricule</th>
