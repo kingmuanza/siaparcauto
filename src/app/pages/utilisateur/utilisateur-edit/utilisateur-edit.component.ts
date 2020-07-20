@@ -41,7 +41,6 @@ export class UtilisateurEditComponent implements OnInit {
     this.utilisateurSubscription = this.idService.utilisateurSubject.subscribe((utilisateur) => {
       this.utilisateur = utilisateur;
     });
-    this.idService.emit();
     this.getSites();
   }
 

@@ -14,7 +14,14 @@ export class AuthGuard implements CanActivate {
         if (this.idservice.utilisateur) {
             return true;
         } else {
-            this.router.navigate(['connexion']);
+            const user = localStorage.getItem('SIAPARCAUTOUtilisateur');
+            if (user) {
+                this.idservice.utilisateur = JSON.parse(user);
+                this.idservice.emit();
+                return true;
+            } else {
+                this.router.navigate(['connexion']);
+            }
         }
     }
 

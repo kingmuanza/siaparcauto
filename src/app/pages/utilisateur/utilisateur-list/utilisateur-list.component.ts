@@ -112,6 +112,9 @@ export class UtilisateurListComponent implements OnInit {
   edit(utilisateur) {
     this.router.navigate(['utilisateur', 'edit', utilisateur.id]);
   }
+  voir(utilisateur) {
+    this.router.navigate(['utilisateur', 'edit', utilisateur.id]);
+  }
   add() {
     this.router.navigate(['utilisateur', 'edit']);
   }

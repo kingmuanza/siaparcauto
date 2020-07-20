@@ -8,8 +8,8 @@
                 </span>
                 <input  [(ngModel)]="recherche" (ngModelChange)="rechercher($event)" type="text">
             </div>
-            <div class="cell-lg-2 fg-white">
-                <span (click)="addVehicule()" class="muanza-icon">
+            <div class="cell-lg-1 fg-white">
+                <span (click)="addVehicule()" class="muanza-icon" style="">
                     <span class="mif-drive-eta">
                     </span>
                     <sup>
@@ -18,6 +18,8 @@
                         </b>
                     </sup>
                 </span>
+            </div>
+            <div class="cell-lg-1 fg-white">
                 <span (click)="addConducteur()" class="muanza-icon">
                     <span class="mif-user">
                     </span>
@@ -30,10 +32,10 @@
             </div>
             <div title="Déconnexion" style="cursor: pointer;" class="cell-lg-2" (click)="deconnexion()">
                 <div class="text-right fg-white">
-                    <span class="">
+                    <div>
                         {{utilisateur.noms ? utilisateur.noms: emailSplit(utilisateur.email)}}
-                    </span>
-                    <div style="margin-top: -10px;;">
+                    </div>
+                    <div style="margin-top: -10px;">
                         <small>
                             {{utilisateur.type ? utilisateur.type : 'Administrateur'}}
                             {{utilisateur.site ? utilisateur.site.nom : ''}}
@@ -43,8 +45,8 @@
                 </div>
             </div>
             <div class="cell-lg-1">
-                <div style="margin-top: 5px;">
-                    <img src="../../../assets/img/user.png" style="height: 32px; border-radius: 50%;">
+                <div style="border: 2px solid #fff; margin-top: 0px; height: 38px; background-image: url('../../../assets/img/user.png'); background-size: cover; background-position: center center;">
+                   
                 </div>
             </div>
         </div>

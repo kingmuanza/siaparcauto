@@ -49,6 +49,7 @@ export class ConnexionComponent implements OnInit {
     const email = valueForm.login;
     const passe = valueForm.passe;
     this.idService.signIn(email, passe).then((utilisateur) => {
+      localStorage.setItem('SIAPARCAUTOUtilisateur', JSON.stringify(utilisateur));
       console.log('Authentification réussie');
       this.router.navigate(['dashboard']);
       console.log(utilisateur);

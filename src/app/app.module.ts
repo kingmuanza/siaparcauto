@@ -45,6 +45,12 @@ import { RechercherComponent } from './pages/vehicule/rechercher/rechercher.comp
 import { MissionEditComponent } from './pages/mission/mission-edit/mission-edit.component';
 import { CarteGriseEditComponent } from './pages/carte-grise/carte-grise-edit/carte-grise-edit.component';
 import { CarteGriseSuiviComponent } from './pages/carte-grise/carte-grise-suivi/carte-grise-suivi.component';
+import { PanneViewComponent } from './pages/panne/panne-view/panne-view.component';
+import { ReparationViewComponent } from './pages/reparation/reparation-view/reparation-view.component';
+import { LeasingViewComponent } from './pages/leasing/leasing-view/leasing-view.component';
+import { MissionViewComponent } from './pages/mission/mission-view/mission-view.component';
+import { MissionListComponent } from './pages/mission/mission-list/mission-list.component';
+import { NotificationListComponent } from './pages/notification/notification-list/notification-list.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +92,13 @@ import { CarteGriseSuiviComponent } from './pages/carte-grise/carte-grise-suivi/
     RechercherComponent,
     MissionEditComponent,
     CarteGriseEditComponent,
-    CarteGriseSuiviComponent
+    CarteGriseSuiviComponent,
+    PanneViewComponent,
+    ReparationViewComponent,
+    LeasingViewComponent,
+    MissionViewComponent,
+    MissionListComponent,
+    NotificationListComponent
   ],
   imports: [
     BrowserModule,

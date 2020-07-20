@@ -3,6 +3,12 @@
         <h1>
             Enregistrer une réparation
         </h1>
+        <div style="margin-top: -5px;">
+            <b class="fg-white" *ngIf="reparation && reparation.vehicule">
+                {{reparation.vehicule.immatriculation}}
+                {{reparation.vehicule.modele}}
+            </b>
+        </div>
 
     </div>
     <div class="contenu">
@@ -24,32 +30,44 @@
                                 </div>
                                 <div class="cell-lg-12">
                                     <label>Véhicule *</label>
-                                    <select formControlName="vehicule">
-                                        <ng-container *ngFor="let vehicule of vehicules">         
+                                    <select *ngIf="!reparation" formControlName="vehicule">
+                                        <ng-container *ngFor="let vehicule of vehicules">
                                             <option *ngIf="vehicule.etat && vehicule.etat ==='En panne'"
-                                            [selected]="reparation && reparation.vehicule.id===vehicule.id"
-                                            [ngValue]="vehicule">
-                                            {{vehicule.modele}} - {{vehicule.immatriculation}}
-                                        </option>
-                                    </ng-container>
+                                                [selected]="reparation && reparation.vehicule.id===vehicule.id"
+                                                [ngValue]="vehicule">
+                                                {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                            </option>
+                                        </ng-container>
+                                    </select>
+                                    <select *ngIf="reparation" formControlName="vehicule">
+                                        <ng-container *ngFor="let vehicule of vehicules">
+                                            <option
+                                                [selected]="reparation && reparation.vehicule.id===vehicule.id"
+                                                [ngValue]="vehicule">
+                                                {{vehicule.modele}} - {{vehicule.immatriculation}}
+                                            </option>
+                                        </ng-container>
                                     </select>
                                     <small>Choisissez le véhicule</small>
                                 </div>
                                 <div class="cell-lg-12">
-                                    <textarea formControlName="description" data-role="textarea" data-prepend="Description"></textarea>
+                                    <textarea formControlName="description" data-role="textarea"
+                                        data-prepend="Description"></textarea>
                                 </div>
                                 <div class="cell-lg-12">
-                                    <input data-prepend="Coût Total" formControlName="coutTotal"
-                                        data-role="input">
+                                    <input data-prepend="Coût Total" formControlName="coutTotal" data-role="input">
                                 </div>
                                 <div class="cell-lg-12">
-                                    <input data-prepend="Effectué par" formControlName="effectuePar"
-                                        data-role="input">
+                                    <input data-prepend="Effectué par" formControlName="effectuePar" data-role="input">
                                 </div>
                                 <div class="cell-lg-12">
-                                    <button class="button" [disabled]="reparationForm.invalid">
+                                    <button style="margin-right: 10px;" class="button"
+                                        [disabled]="reparationForm.invalid">
                                         Enregistrer
                                     </button>
+                                    <a *ngIf="reparation" class="button danger alert fg-white">
+                                        Supprimer
+                                    </a>
                                 </div>
                             </form>
                         </div>
